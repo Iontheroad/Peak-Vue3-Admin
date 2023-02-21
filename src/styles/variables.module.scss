@@ -1,0 +1,25 @@
+// sidebar
+$menuText:#bfcbd9; // 侧边栏导航菜单的文字颜色
+$menuActiveText:#409EFF; // 激活的侧边栏导航菜单的文字颜色
+$subMenuActiveText:#f4f4f5;// 选中子菜单，根菜单的字体颜色
+
+$menuBg:#304156; // 侧边栏导航根菜单背景颜色
+$menuHover:#263445; // 鼠标移入后的侧边栏导航菜单背景
+
+$subMenuBg:#1f2d3d;  // 侧边栏导航子菜单的背景颜色
+$subMenuHover:#001528; // 侧边栏导航子菜单项的移入背景颜色
+
+$sideBarWidth: 210px; // 侧边栏导航菜单宽度
+
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
+}

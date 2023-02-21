@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // ts代码编译的js版本
+    "useDefineForClassFields": true,
+    "module": "ESNext", // 编译后代码的模块化方式
+    "moduleResolution": "Node", // 选择模块解析策略
+    "types": ["vite-plugin-svg-icons/client", "node"], // 指定要包含的类型包名，而不需要在源文件中引用。
+    "strict": true, // 开启所有严格检查
+    "jsx": "preserve",
+    "resolveJsonModule": true, // 启用导入.json文件
+    "isolatedModules": true, // 确保每个文件都可以安全地转译，而不依赖于其他导入。
+    "esModuleInterop": true, // 生成额外的JavaScript以简化对导入CommonJS模块的支持。这使得 allowsyntheticdefaulultimports 具有类型兼容性。
+    "lib": ["ESNext", "DOM"], // 指定代码运行时所包含的库（宿主环境）
+    // "skipLibCheck": true, // 跳过所有.d的类型检查。ts文件。
+    // "noEmit": true, // 从编译中禁用发射文件。
+    "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
+    "paths": {
+      //路径映射，相对于baseUrl
+      // 指定一组将导入重新映射到其他查找位置的条目。
+      "@/*": ["src/*"]
+    },
+    "allowSyntheticDefaultImports": true // 允许从没有设置默认导出的模块中默认导入
+  },
+  // 被编译的文件的所在目录(表示src下的.ts\.d.ts\.tsx,.vue都会被编译)
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/mocks/json/sideber.json"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
