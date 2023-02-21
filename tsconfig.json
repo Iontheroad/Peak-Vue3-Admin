@@ -5,7 +5,7 @@
     "module": "ESNext", // 编译后代码的模块化方式
     "moduleResolution": "Node", // 选择模块解析策略
     "types": ["vite-plugin-svg-icons/client", "node"], // 指定要包含的类型包名，而不需要在源文件中引用。
-    "strict": true, // 开启所有严格检查
+    // "strict": true, // 开启所有严格检查
     "jsx": "preserve",
     "resolveJsonModule": true, // 启用导入.json文件
     "isolatedModules": true, // 确保每个文件都可以安全地转译，而不依赖于其他导入。

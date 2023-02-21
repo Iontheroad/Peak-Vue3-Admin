@@ -5,7 +5,7 @@
 import { defineStore } from "pinia";
 import { getUserInfoApi } from "@/api/user";
 import { reqLoginApi, reqLogoutApi } from "@/api/login";
-import type { LoginData } from "@/api/login/login.d.ts";
+import { LoginData } from "@/api/login/login";
 import { getToken, removeToken, setToken } from "@/utils/cookie_token";
 
 const useUserStore = defineStore("userStore", {
