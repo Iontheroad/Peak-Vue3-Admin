@@ -26,9 +26,7 @@ export const hasPerm: Directive = {
         el.parentNode && el.parentNode.removeChild(el);
       }
     } else {
-      throw new Error(
-        "指令格式应为: v-has-perm='['sys:user:add','sys:user:edit']'"
-      );
+      throw new Error("指令格式应为: v-has-perm='['sys:user:add']'");
     }
   },
 };

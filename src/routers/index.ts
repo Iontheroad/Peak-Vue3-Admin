@@ -6,11 +6,11 @@ import usePermissionStore from "@/store/modules/permission";
 import {
   createRouter,
   createWebHashHistory,
+  createWebHistory,
   RouteRecord,
   RouteRecordRaw,
 } from "vue-router";
-
-const Layout = () => import("@/layout/index.vue");
+import { staticRoute, errorRoute } from "@/routers/modules/static-router";
 
 /**
  * 路由类型
@@ -43,7 +43,7 @@ export namespace routeOptionsType {
  * @description 路由参数配置
  * @param path ==> 路径
  * @param name ==> 路由别名
- * @param redirect ==> 重定向
+ * @param redirect ==> 重定向 // 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
  * @param component ==> 对应组件
  * @param children ==> 子路由
  * @param meta ==> 路由元信息
@@ -56,77 +56,28 @@ export namespace routeOptionsType {
  * @param meta.isFull ==>(默认false) 是否全屏(示例：数据大屏页面)
  * @param meta.isAffix ==>(默认false) 是否固定在 tabs nav
  * @param meta.isKeepAlive ==>(默认false) 是否缓存,如果设置为true，则不会被 <keep-alive> 缓存
- * @param meta.isBreadcrumb ==>(默认true) 如果设置为false，则不会在breadcrumb面包屑中显示
- * @param meta.isAlwaysShow ==>(默认false) 当你一个路由下面的 children 声明的子路由大于1个时，自动会变成嵌套的模式, 只有一个时，会将那个子路由当做根路由显示在侧边栏--如引导页面, 若你想不管路由下面的 children 声明的个数都显示你的根路由, 你可以设置true，这样它就会忽略之前定义的规则，一直显示根路由.
+ * @param meta.isBreadcrumbHidden ==>(默认false)是否隐藏面包屑 如果设置为true，则不会在breadcrumb面包屑中显示
+ * @param meta.isAlwaysShow ==>(默认false) 当你一个路由下面的 children 声明的子路由大于1个时，自动会变成嵌套的模式, 只有一个时会将那个子路由当做根路由显示在侧边栏--如引导页面, 若你想不管路由下面的 children 声明的个数都显示你的根路由, 你可以设置true，这样它就会忽略之前定义的规则，一直显示根路由.
  */
 export const constantRoutes: Array<RouteRecordRaw> = [
-  {
-    path: "/login",
-    component: () => import("@/views/login/index.vue"),
-    meta: {
-      isHidden: true,
-    },
-  },
-  {
-    path: "/404",
-    component: () => import("@/views/error-page/404.vue"),
-    meta: {
-      isHidden: true,
-    },
-  },
-  {
-    // 首页
-    path: "/",
-    component: Layout,
-    redirect: "/dashboard",
-    children: [
-      {
-        path: "dashboard",
-        name: "Dashboard",
-        component: () => import("@/views/dashboard/index.vue"),
-        meta: {
-          title: "Dashboard",
-          icon: "dashboard",
-        },
-      },
-    ],
-  },
-  {
-    // 统一处理
-    path: "/*",
-    redirect: "/404",
-    meta: {
-      isHidden: true,
-    },
-  },
-  /*
-  const routes = [
-    // 将匹配所有内容并将其放在 `$route.params.pathMatch` 下
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
-    // 将匹配以 `/user-` 开头的所有内容，并将其放在 `$route.params.afterUser` 下
-    { path: '/user-:afterUser(.*)', component: UserGeneric },
-  ]
-  */
-  // {
-  //   path: "/:pathMatch(.*)*",
-  //   component: () => import("@/views/error/404"),
-  //   hidden: true,
-  // },
+  ...staticRoute,
+  ...errorRoute,
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: constantRoutes as RouteRecordRaw[],
+  routes: constantRoutes,
   // 刷新时，滚动条位置还原
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 
-// 重置路由
+// 重置路由 ， 退出登录时调用
 export function resetRouter() {
   const permissionStore = usePermissionStore();
   permissionStore.routes.forEach((route) => {
     const name = route.name;
     if (name) {
+      // 先判断路由是否存在，存在就删除
       router.hasRoute(name) && router.removeRoute(name);
     }
   });

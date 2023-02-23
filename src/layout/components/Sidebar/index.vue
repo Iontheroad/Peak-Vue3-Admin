@@ -1,28 +1,26 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { storeToRefs } from "pinia";
+// import { storeToRefs } from "pinia";
 
-import SidebarItem from "./SidebarItem.vue"; //
+import SidebarItem from "./SidebarItem.vue";
 import Logo from "./Logo.vue";
-import variables from "@/styles/variables.module.scss";
 
-import { useSettingsStore } from "@/store/modules/settings";
+import variables from "@/styles/variables.module.scss";
 import { usePermissionStore } from "@/store/modules/permission";
 import { useAppStore } from "@/store/modules/app";
+import { useGlobalStore } from "@/store/index";
 
-const settingsStore = useSettingsStore(); // 设置状态仓库
+// const settingsStore = useSettingsStore(); // 设置状态仓库
 const permissionStore = usePermissionStore(); // 权限路由状态仓库
 const appStore = useAppStore();
-
-const {
-  sidebarLogo, // 默认显示logo
-} = storeToRefs(settingsStore); // 解构
+const globalStore = useGlobalStore();
 const route = useRoute();
 
-const isCollapse = computed(() => !appStore.sidebar.opened); // 控制logo的展开收起样式
+const isShowLogo = computed(() => globalStore.themeConfig.isShowLogo); // Logo是否显示
+const isCollapse = computed(() => !appStore.sidebar.opened); //是否折叠菜单
 
-/* 高亮所设置的菜单 */
+/* 高亮所设置的指定菜单 */
 const activeMenu = computed<string>(() => {
   const { meta, path } = route;
   if (meta?.activeMenu) {
@@ -34,10 +32,10 @@ const activeMenu = computed<string>(() => {
 
 <template>
   <!-- has-logo类： 当logo显示就会腾出高度给logo -->
-  <div :class="{ 'has-logo': sidebarLogo }">
+  <div :class="{ 'has-logo': isShowLogo }">
     <!-- 是否显示Logo组件，默认不显示 -->
-    <logo v-if="sidebarLogo" :collapse="isCollapse" />
-    <el-scrollbar>
+    <logo v-if="isShowLogo" :collapse="isCollapse" />
+    <el-scrollbar wrap-class="scrollbar-wrapper">
       <!--  :collapse="isCollapse" 是否折叠菜单 -->
       <el-menu
         :default-active="activeMenu"

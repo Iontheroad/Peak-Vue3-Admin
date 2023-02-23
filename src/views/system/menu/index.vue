@@ -1,4 +1,4 @@
-<script setup lang="ts"></script>
+<script setup lang="ts" name="Menu"></script>
 
 <template>
   <div></div>

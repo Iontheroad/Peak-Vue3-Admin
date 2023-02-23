@@ -18,9 +18,10 @@
                 placeholder="Password"
                 v-model="formData.password"
               />
+              <!-- <el-input class="inputBox" type="password" v-model="formData.password"></el-input> -->
             </div>
-            <div class="inputBox">
-              <input type="submit" value="Login" @click="clickLogin" />
+            <div class="inputBox" @click.prevent="clickLogin">
+              <input type="submit" value="Login" />
             </div>
           </form>
         </div>

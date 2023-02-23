@@ -78,6 +78,8 @@ export const usePermissionStore = defineStore({
   actions: {
     // 设置路由
     setRoutes(routes: RouteRecordRaw[]) {
+      // console.log(this, "jjjj");
+
       this.addRoutes = routes; // 记录异步路由
       // 静态路由 + 动态路由
       this.routes = constantRoutes.concat(routes); // 合并静态和动态路由
@@ -88,7 +90,7 @@ export const usePermissionStore = defineStore({
       try {
         // 获取动态路由
         let result = await getListRoutesApi();
-        console.log(result);
+        // console.log(result);
 
         const asyncRoutes = result.data; // 拿到异步路由
         let accessedRoutes = filterAsyncRoutes(asyncRoutes, roles); // 拿到遍历后的异步路由
@@ -99,7 +101,11 @@ export const usePermissionStore = defineStore({
       }
     },
   },
-  getters: {},
+  getters: {
+    // routeList_getter(state) {
+    //   return state.routes;
+    // },
+  },
 });
 
 export default usePermissionStore;

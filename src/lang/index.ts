@@ -10,6 +10,7 @@ import { localStorage } from "@/utils/localStorage";
 import enLocale from "./en";
 import zhCnLocale from "./zh-cn";
 
+// 页面的对应单词
 const messages = {
   "zh-cn": {
     ...zhCnLocale,
@@ -33,11 +34,16 @@ export const getLanguage = () => {
   // 浏览器使用语言
   language = navigator.language.toLowerCase();
   const locales = Object.keys(messages);
-  for (const locale of locales) {
-    if (language.indexOf(locale) > -1) {
-      return locale;
-    }
+  // 是否有浏览器使用的语言,有就跟随浏览器的语言
+  if (locales.includes(language)) {
+    return language;
   }
+  // for (const locale of locales) {
+  //   if (language.indexOf(locale) > -1) {
+  //     return locale;
+  //   }
+  // }
+  // 默认中文
   return "zh-cn";
 };
 

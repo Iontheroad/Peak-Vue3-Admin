@@ -1,4 +1,4 @@
-<script setup lang="ts"></script>
+<script setup lang="ts" name="Role"></script>
 
 <template>
   <div></div>

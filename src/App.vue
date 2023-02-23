@@ -9,7 +9,7 @@ const appStore = useAppStore();
 
 <template>
   <el-config-provider :locale="appStore.locale" :size="appStore.size">
-    <router-view></router-view>
+    <router-view> </router-view>
   </el-config-provider>
 </template>
 

@@ -1,8 +1,9 @@
 /**
- * Created by PanJiaChen on 16/11/18.
+ * 验证工具
  */
 
 /**
+ * 是否是链接开头
  * @param {string} path
  * @returns {Boolean}
  */

@@ -7,7 +7,7 @@ import { DeviceType, useAppStore } from "@/store/modules/app";
 const appStore = useAppStore();
 
 const sidebar = computed(() => appStore.sidebar);
-const device = computed(() => appStore.device);
+const device = computed(() => appStore.device); //
 
 const props = defineProps({
   to: {
@@ -28,6 +28,7 @@ function push() {
 </script>
 
 <template>
+  <!-- 是链接就用a标签 -->
   <a v-if="isExternal(to)" :href="to" target="_blank" rel="noopener">
     <slot />
   </a>

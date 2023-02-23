@@ -1,13 +1,13 @@
 [
   {
     "path": "/system",
+    "name": "System",
     "redirect": "/system/user",
     "component": "Layout",
     "meta": {
       "title": "系统管理",
       "icon": "system",
       "roles": ["ADMIN"],
-      "isHidden": false,
       "isAlwaysShow": true,
       "isKeepAlive": true
     },
@@ -20,9 +20,7 @@
           "title": "用户管理",
           "icon": "user",
           "roles": ["ADMIN"],
-          "isHidden": false,
-          "isAlwaysShow": false,
-          "isKeepAlive": true
+          "isAlwaysShow": false
         }
       },
       {
@@ -33,9 +31,7 @@
           "title": "角色管理",
           "icon": "role",
           "roles": ["ADMIN"],
-          "isHidden": false,
-          "isAlwaysShow": false,
-          "isKeepAlive": true
+          "isAlwaysShow": false
         }
       },
       {
@@ -46,34 +42,30 @@
           "title": "菜单管理",
           "icon": "menu",
           "roles": ["ADMIN"],
-          "isHidden": false,
           "isAlwaysShow": false,
           "isKeepAlive": true
         }
       },
       {
         "path": "dept",
-        "name": "dept",
+        "name": "Dept",
         "component": "system/dept/index",
         "meta": {
           "title": "部门管理",
           "icon": "tree",
           "roles": ["ADMIN"],
-          "isHidden": false,
           "isAlwaysShow": false,
           "isKeepAlive": true
         }
       },
       {
         "path": "dict",
-        "name": "dict",
+        "name": "Dict",
         "component": "system/dict/index",
         "meta": {
           "title": "字典管理",
           "icon": "dict",
           "roles": ["ADMIN"],
-          "isHidden": false,
-          "isAlwaysShow": false,
           "isKeepAlive": true
         }
       }
@@ -81,75 +73,72 @@
   },
   {
     "path": "/nested",
-    "redirect": "/nested/menu1",
+    "name": "Nested",
+    "redirect": "/nested/menu2",
     "component": "Layout",
     "meta": {
       "title": "多级菜单",
       "icon": "multi_menu",
       "roles": ["ADMIN"],
-      "isHidden": false,
-      "isAlwaysShow": true,
       "isKeepAlive": true
     },
     "children": [
       {
         "path": "menu1",
+        "name": "Menu1",
         "component": "nested/menu1/index",
-        "redirect": "/nested/menu1/menu1-1",
+        "redirect": "/nested/menu1/menu11",
         "meta": {
           "title": "menu1",
           "icon": "menu1",
           "roles": ["ADMIN"],
-          "isHidden": false,
           "isAlwaysShow": true,
           "isKeepAlive": true
         },
         "children": [
           {
-            "path": "menu1-1",
-            "component": "nested/menu1/menu1-1/index",
+            "path": "menu11",
+            "name": "Menu11",
+            "component": "nested/menu1/menu11/index",
             "meta": {
-              "title": "menu1-1",
-              "icon": "menu1-1",
+              "title": "menu11",
+              "icon": "menu11",
               "roles": ["ADMIN"],
-              "isHidden": false,
               "isKeepAlive": true
             }
           },
           {
-            "path": "menu1-2",
-            "name": "Menu1-2",
-            "component": "nested/menu1/menu1-2/index",
-            "redirect": "/nested/menu1/menu1-2/menu1-2-1",
+            "path": "menu12",
+            "name": "Menu12",
+            "component": "nested/menu1/menu12/index",
+            "redirect": "/nested/menu1/menu12/menu121",
             "meta": {
-              "title": "menu1-2",
-              "icon": "menu1-2",
+              "title": "menu12",
+              "icon": "menu12",
               "roles": ["ADMIN"],
-              "isHidden": false,
-              "isKeepAlive": true
+              "isKeepAlive": true,
+              "isAlwaysShow": true
             },
             "children": [
               {
-                "path": "menu1-2-1",
-                "name": "Menu1-2-1",
-                "component": "nested/menu1/menu1-2/menu1-2-1/index",
+                "path": "menu121",
+                "name": "Menu121",
+                "component": "nested/menu1/menu12/menu121/index",
                 "meta": {
-                  "title": "menu1-2-1",
-                  "icon": "menu1-2-1",
+                  "title": "menu121",
+                  "icon": "menu121",
                   "roles": ["ADMIN"],
-                  "isHidden": false,
                   "isKeepAlive": true
                 }
               },
               {
-                "path": "menu1-2-2",
-                "name": "Menu1-2-2",
-                "component": "nested/menu1/menu1-2/menu1-2-2/index",
+                "path": "menu122",
+                "name": "Menu122",
+                "component": "nested/menu1/menu12/menu122/index",
                 "meta": {
-                  "title": "menu1-2-2",
-                  "icon": "menu1-2-2",
+                  "title": "menu122",
+                  "icon": "menu122",
                   "roles": ["ADMIN"],
-                  "isHidden": false,
                   "isKeepAlive": true
                 }
               }
@@ -161,7 +150,38 @@
         "path": "menu2",
         "name": "Menu2",
         "component": "nested/menu2/index",
-        "meta": { "title": "menu2", "icon": "menu" }
+        "meta": {
+          "title": "menu2",
+          "icon": "menu2",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      }
+    ]
+  },
+  {
+    "path": "/superTable",
+    "name": "table",
+    "component": "Layout",
+    "redirect": "/superTable/tableVerify",
+    "meta": {
+      "title": "表格组件",
+      "icon": "table",
+      "roles": ["ADMIN"],
+      "isAlwaysShow": true,
+      "isKeepAlive": true
+    },
+    "children": [
+      {
+        "path": "tableVerify",
+        "name": "TableVerify",
+        "component": "superTable/tableVerify/index",
+        "meta": {
+          "title": "表格组件",
+          "icon": "tableVerify",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
       }
     ]
   }

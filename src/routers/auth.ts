@@ -3,12 +3,16 @@
  * auth 拦截
  */
 
+import { RouteRecordRaw } from "vue-router";
 import router from "@/routers";
 import { ElMessage } from "element-plus";
 import NProgress from "nprogress"; // 进度条
 import "nprogress/nprogress.css"; // 进度条样式
 import useUserStore from "@/store/modules/user"; // 用户状态仓库
 import usePermissionStore from "@/store/modules/permission";
+import { notFoundRoute } from "@/routers/modules/static-router";
+
+// 进度条配置
 NProgress.configure({
   easing: "ease", // 动画方式
   speed: 500, // 递增进度条的速度
@@ -51,13 +55,16 @@ router.beforeEach(async (to, form, next) => {
           const accessRoutes: any = await permissionStore.getListRoutes_action(
             roles
           );
-          console.log(accessRoutes);
+          // console.log(accessRoutes);
 
           // 遍历重新获取的路由集火
           accessRoutes.forEach((route: any) => {
             // 添加
             router.addRoute(route);
           });
+
+          // 最后添加 notFoundRoute
+          router.addRoute(notFoundRoute);
           next({ ...to, replace: true });
         } catch (error) {
           // 获取 用户信息失败

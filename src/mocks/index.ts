@@ -27,7 +27,7 @@ import sidebar_mock from "./json/sidebar_data.json";
 
 /** mock路由 菜单数据 */
 Mock.mock(/\/dev-api\/mock\/sidebar/, (params) => {
-  console.log(params);
+  // console.log(params);
 
   // console.log(params.body); 拿body 传参
   // console.log(qs.parse(params.url.split("?")[1])); 拿get的传参
@@ -35,7 +35,7 @@ Mock.mock(/\/dev-api\/mock\/sidebar/, (params) => {
     data: sidebar_mock,
     success: true,
     code: "00000",
-    msg: "mock数据",
+    msg: "mock菜单栏数据",
   };
 });
 

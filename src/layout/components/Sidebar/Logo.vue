@@ -1,5 +1,5 @@
 <template>
-  <!-- 此处class类(collapse) 用于清除 收起时图标的右侧外边距 -->
+  <!-- 此处class类(collapse) 用于清除 收起时logo的右侧外边距 -->
   <div class="sidebar-logo-container" :class="{ collapse: collapse }">
     <!-- 动画 -->
     <transition name="sidebarLogoFade">
@@ -25,29 +25,18 @@
 <script setup lang="ts" name="Logo">
 import { ref } from "vue";
 defineProps<{
-  collapse: boolean; //
+  collapse: boolean;
 }>();
 
-let title = ref("Vue Admin Template");
+let title = ref("Peak Vue3 Admin");
 // let logo = ref(
 //   "https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png"
 // );
-const logo = ref<string>(
-  new URL(`../../../assets/logo.png`, import.meta.url).href
-);
+const logo = ref<string>(new URL(`@/assets/logo.png`, import.meta.url).href);
 // console.log(logos);
 </script>
 
 <style lang="scss" scoped>
-// 只需进入动画
-.sidebarLogoFade-enter-active {
-  transition: opacity 1.5s;
-}
-.sidebarLogoFade-enter,
-.sidebarLogoFade-leave-to {
-  opacity: 0;
-}
-
 .sidebar-logo-container {
   position: relative;
   width: 100%;
@@ -57,18 +46,29 @@ const logo = ref<string>(
   text-align: center;
   overflow: hidden;
 
-  & .sidebar-logo-link {
-    height: 100%;
-    width: 100%;
+  /*只需给刚进入和离开之后添加动画即可 */
+  .sidebarLogoFade-enter-active {
+    transition: opacity 1.5s;
+  }
+  .sidebarLogoFade-enter,
+  .sidebarLogoFade-leave-to {
+    opacity: 0;
+  }
 
-    & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+  /* Logo容器 */
+  .sidebar-logo-link {
+    width: 100%;
+    height: 100%;
+
+    // logo大小
+    .sidebar-logo {
+      width: 25px;
+      height: 25px;
       vertical-align: middle;
       margin-right: 12px;
     }
-
-    & .sidebar-title {
+    // logo 标题文字
+    .sidebar-title {
       display: inline-block;
       margin: 0;
       color: #fff;
@@ -80,10 +80,10 @@ const logo = ref<string>(
     }
   }
 
-  // 收起时
+  // 收起时不显示title
   &.collapse {
     .sidebar-logo {
-      //  收起时 取消右边距
+      //  收起时 取消logo右边距
       margin-right: 0px;
     }
   }

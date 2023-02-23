@@ -1,9 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts" name="Menu1"></script>
 
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+  <el-alert :closable="false" title="菜单1">
+    <router-view />
+  </el-alert>
 </template>
 
 <style scoped></style>

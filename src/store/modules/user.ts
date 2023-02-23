@@ -8,7 +8,7 @@ import { reqLoginApi, reqLogoutApi } from "@/api/login";
 import { LoginData } from "@/api/login/login";
 import { getToken, removeToken, setToken } from "@/utils/cookie_token";
 
-const useUserStore = defineStore("userStore", {
+export const useUserStore = defineStore("userStore", {
   // id: "userStore",
   state: () => ({
     token: getToken(), // token

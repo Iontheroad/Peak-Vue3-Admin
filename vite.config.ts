@@ -20,6 +20,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   // console.log(env);
 
   return {
+    base: "./",
     resolve: {
       // 别名配置
       alias: {

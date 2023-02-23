@@ -1,5 +1,6 @@
 /**
  * 本地存储 window.localStorage
+ * 存储一些 设置项（如默认大小）
  */
 export const localStorage = {
   // 获取永久缓存
@@ -21,33 +22,35 @@ export const localStorage = {
   },
 };
 
-// 侧边栏状态(显示/隐藏)
+/**
+ * 侧边栏状态(显示/隐藏)存储本地
+ */
 const SidebarStatusKey = "sidebarStatus";
 export function getSidebarStatus() {
   return localStorage.get(SidebarStatusKey);
 }
-
 export function setSidebarStatus(sidebarStatus: string) {
   localStorage.set(SidebarStatusKey, sidebarStatus);
 }
-// 布局大小
-const SizeKey = "size";
 
+/**
+ * 布局大小
+ */
+const SizeKey = "size";
 export function getSize() {
   return localStorage.get(SizeKey);
 }
-
 export function setSize(size: string) {
   localStorage.set(SizeKey, size);
 }
 
-// 语言
+/**
+ * 语言
+ */
 const LanguageKey = "language";
-
 export function getLanguage() {
   return localStorage.get(LanguageKey);
 }
-
 export function setLanguage(language: string) {
   localStorage.set(LanguageKey, language);
 }

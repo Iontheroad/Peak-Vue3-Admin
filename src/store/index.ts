@@ -6,12 +6,19 @@ import { createPinia, defineStore } from "pinia";
 import useUserStore from "./modules/user";
 
 // 全局状态
-const userGlobalStore = defineStore("globalStore", {
-  state: () => ({}),
+const useGlobalStore = defineStore("globalStore", {
+  state: () => ({
+    /* 主体配置 */
+    themeConfig: {
+      isShowLogo: true, // 是否显示Logo
+      isFixedHeader: true, // 是否固定表头
+      isShowTagsView: true, // 是否显示标签视图
+    },
+  }),
 });
 
 const pinia = createPinia();
 
 //
-export { userGlobalStore, useUserStore };
+export { useGlobalStore, useUserStore };
 export default pinia;

@@ -1,12 +1,18 @@
 <template>
-  <svg aria-hidden="true" class="svg-icon">
+  <!--自定义 url图标 -->
+  <div
+    v-if="is_Url_or_svg"
+    :style="styleExternalIcon"
+    class="svg-external-icon svg-icon"
+  />
+  <svg v-else aria-hidden="true" :class="className">
     <use :xlink:href="symbolId" :fill="color"></use>
   </svg>
 </template>
 
 <script setup lang="ts" name="SvgIcon">
 import { computed } from "vue";
-
+import { isExternal } from "@/utils/validate";
 interface SvgProps {
   prefix?: string;
   iconName: string;
@@ -36,11 +42,37 @@ const props = defineProps({
     type: String,
     default: "",
   },
+
+  // 传入的class样式
+  className: {
+    type: String,
+    default: "",
+  },
 });
 
-// svg 名称
+// 拼接class类样式
+const className = computed(() => {
+  // console.log(this.className);
+  if (props.className) {
+    return "svg-icon " + props.className;
+  } else {
+    return "svg-icon";
+  }
+});
+
+// 判断图标
+const is_Url_or_svg = computed(() => isExternal(props.iconName));
+
+// url图标
+const styleExternalIcon = computed(() => {
+  return {
+    mask: `url(${props.iconName}) no-repeat 50% 50%`,
+    "-webkit-mask": `url(${props.iconName}) no-repeat 50% 50%`,
+  };
+});
+
+// 拼接完整 svg图标
 const symbolId = computed(() => `#${props.prefix}-${props.iconName}`);
-// console.log(symbolId);
 </script>
 
 <style scoped>
@@ -50,5 +82,11 @@ const symbolId = computed(() => `#${props.prefix}-${props.iconName}`);
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+
+.svg-external-icon {
+  background-color: currentColor;
+  mask-size: cover !important;
+  display: inline-block;
 }
 </style>
