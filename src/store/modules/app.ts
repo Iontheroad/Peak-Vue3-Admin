@@ -36,7 +36,7 @@ export const useAppStore = defineStore("app", () => {
   // 菜单栏
   const sidebar = reactive({
     opened: getSidebarStatus() !== "closed", // 导航栏展开(opened)收起(closed)
-    // TAG: 该属性待研究
+    // TAG: 该属性待研究，展示是控制动画是否关闭的
     withoutAnimation: false, // 移动窗口宽度小于992变为true
   });
   // pc：desktop    移动： mobile 窗口宽度小于992

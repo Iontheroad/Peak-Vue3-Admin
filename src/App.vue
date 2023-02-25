@@ -1,14 +1,24 @@
 <script setup lang="ts">
+// Element Plus 语言包
+import zhCn from "element-plus/es/locale/lang/zh-cn";
+import en from "element-plus/es/locale/lang/en";
 import { ElConfigProvider } from "element-plus";
+import { computed } from "vue";
+import { useGlobalStore } from "./store";
+const globalStore = useGlobalStore();
 
-import { useAppStore } from "@/store/modules/app";
-
-// 获取系统语言
-const appStore = useAppStore();
+// 获取语言包
+const locale = computed(() => {
+  if (globalStore.language == "zh-cn") {
+    return zhCn;
+  } else if (globalStore.language == "en") {
+    return en;
+  }
+});
 </script>
 
 <template>
-  <el-config-provider :locale="appStore.locale" :size="appStore.size">
+  <el-config-provider :locale="locale" :size="globalStore.elementSize">
     <router-view> </router-view>
   </el-config-provider>
 </template>

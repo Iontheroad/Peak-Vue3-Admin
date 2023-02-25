@@ -51,6 +51,7 @@ class Request {
         return {
           ...config,
           headers: {
+            ...config.headers,
             customToken: "customBearer " + token,
           },
         };

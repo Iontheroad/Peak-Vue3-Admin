@@ -25,6 +25,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       // 别名配置
       alias: {
         "@": path.resolve(__dirname, "./src"),
+        "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js", // 清除i18n控制栏警告
       },
     },
     /* 本地反向代理解决浏览器跨域限制*/

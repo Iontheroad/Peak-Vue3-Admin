@@ -11,15 +11,15 @@
           两个以上:
             只有首页+其他(就是含有子菜单比如Example), 最后一个不能点击；
         -->
-        <!-- 不能点击 -->
         <span
-          v-if="item.redirect === 'noRedirect' || index == levelList.length - 1"
+          v-if="item.redirect == 'noRedirect' || index == levelList.length - 1"
           class="no-redirect"
         >
+          <SvgIcon :icon-name="item.meta.icon as string" />
           {{ generateTitle(item.meta.title) }}
         </span>
-        <!-- 可以点击 -->
         <a v-else @click.prevent="handleLink(item)">
+          <SvgIcon :icon-name="item.meta.icon as string" />
           {{ generateTitle(item.meta.title) }}
         </a>
       </el-breadcrumb-item>
@@ -28,6 +28,7 @@
 </template>
 
 <script lang="ts" setup name="Breadcrumb">
+import SvgIcon from "@/components/SvgIcon/index.vue";
 import * as pathToRegexp from "path-to-regexp";
 import { generateTitle } from "@/utils/i18n";
 import { useRoute, useRouter, RouteLocationMatched } from "vue-router";
@@ -53,21 +54,19 @@ onBeforeMount(() => {
  * 得到面包屑数据
  */
 function getBreadcrumb() {
-  // 只过滤出有meta和meta.title属性的路由
-  console.log(route.matched);
-
+  // 只过滤出有meta和meta.title属性的路由以及不隐藏面包屑的
   let matched = route.matched.filter(
     (item) => item.meta && item.meta.title && !item.meta.isBreadcrumbHidden
   );
   const first = matched[0]; // 拿到第一个跟路由信息
 
-  // 判断： 不是首页路由进入
+  // 判断第一个路由是不是首页路由进入
   if (!isDashboard(first)) {
-    // 就创建个新数组把首页路由添加到数组的第一位
+    //不是 就创建个新数组把首页路由添加到数组的第一位
     matched = [
       {
         path: "/dashboard",
-        meta: { title: "dashboard" },
+        meta: { title: "dashboard", icon: "dashboard" },
       } as any,
     ].concat(matched);
   }
@@ -121,8 +120,6 @@ function pathCompile(path: string) {
 function handleLink(item: any) {
   const { redirect, path } = item;
   // 有重定向，直接跳到重定向
-  console.log(redirect, path, "jjjjjlllll");
-
   if (redirect) {
     router.push(redirect);
     return;

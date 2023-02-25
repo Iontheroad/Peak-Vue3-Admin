@@ -1,4 +1,6 @@
-//  src/utils/i18n.ts
+/**
+ * 翻译
+ */
 import i18n from "@/lang/index";
 // $t 是 i18n 提供的根据 key 从语言包翻译对应的 value 方法
 // <h3 class="title">{{ $t("login.title") }}</h3>

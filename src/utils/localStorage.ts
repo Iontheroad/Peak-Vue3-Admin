@@ -48,7 +48,7 @@ export function setSize(size: string) {
  * 语言
  */
 const LanguageKey = "language";
-export function getLanguage() {
+export function getLanguage_local() {
   return localStorage.get(LanguageKey);
 }
 export function setLanguage(language: string) {

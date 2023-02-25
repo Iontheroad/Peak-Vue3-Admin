@@ -2,9 +2,10 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox } from "element-plus";
-
+import { CaretBottom } from "@element-plus/icons-vue";
 import Breadcrumb from "@/components/Breadcrumb/index.vue";
 import Hamburger from "@/components/Hamburger/index.vue";
+import Language from "./Header/Language.vue";
 
 import { useAppStore } from "@/store/modules/app";
 import { useUserStore } from "@/store/modules/user";
@@ -15,6 +16,9 @@ const userStore = useUserStore();
 const sidebar = computed(() => appStore.sidebar); // 菜单栏状态
 const avatar = computed(() => userStore.userInfo.avatar); // 头像
 
+/**
+ * 点击展开收起状态栏
+ */
 function toggleSideBar() {
   appStore.toggleSidebar(false);
 }
@@ -27,43 +31,55 @@ function click_logout() {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
     type: "warning",
-  }).then(() => {
-    try {
-      userStore.logout_actions();
-      ElMessage.success({
+  })
+    .then(async () => {
+      try {
+        await userStore.logout_actions();
+        ElMessage.success({
+          showClose: true,
+          message: "退出成功",
+        });
+        router.replace("/login");
+      } catch (error) {
+        ElMessage({
+          showClose: true,
+          message: "退出失败",
+          type: "error",
+        });
+      }
+    })
+    .catch(() => {
+      ElMessage.info({
         showClose: true,
-        message: "退出成功",
+        message: "取消退出",
       });
-      router.replace("/login");
-    } catch (error) {
-      ElMessage({
-        showClose: true,
-        message: "退出失败",
-        type: "error",
-      });
-    }
-  });
+    });
 }
 </script>
 
 <template>
   <div class="navbar">
-    <!-- 点击展开收起的按钮 -->
-    <Hamburger
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    />
-    <!-- 面包屑 -->
-    <Breadcrumb class="breadcrumb-container" />
-
-    <!-- 头像 -->
+    <div class="left-menu">
+      <!-- 点击展开收起的按钮 -->
+      <Hamburger
+        :is-active="sidebar.opened"
+        class="hamburger-container"
+        @toggleClick="toggleSideBar"
+      />
+      <!-- 面包屑 -->
+      <Breadcrumb class="breadcrumb-container" />
+    </div>
+    <!-- 右侧 -->
     <div class="right-menu">
+      <!-- 中英互译 -->
+      <Language />
+      <!-- 头像部分 -->
       <el-dropdown class="avatar-container" trigger="click">
-        <!-- 头像部分 -->
         <div class="avatar-wrapper">
           <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
-          <i class="el-icon-caret-bottom" />
+          <!-- <i class="el-icon-caret-bottom" /> -->
+          <!-- <CaretBottom class="user-avatar-icon" /> -->
+          <span>Peak<CaretBottom class="user-avatar-icon" /></span>
         </div>
         <template #dropdown>
           <!-- 点击下拉 -->
@@ -106,6 +122,8 @@ function click_logout() {
 
 <style lang="scss" scoped>
 .navbar {
+  display: flex;
+  justify-content: space-between;
   height: 50px; // 导航栏高度
   overflow: hidden;
   position: relative;
@@ -127,19 +145,19 @@ function click_logout() {
   }
 
   /* 面包屑 */
-  .breadcrumb-container {
-    float: left;
-  }
+  // .breadcrumb-container {
+  //   // float: left;
+  // }
 
-  /* 头像 */
+  /* 右侧*/
   .right-menu {
-    float: right;
+    display: flex;
     height: 100%;
     line-height: 50px;
 
-    // &:focus {
-    //   outline: none;
-    // }
+    &:focus {
+      outline: none;
+    }
 
     .right-menu-item {
       display: inline-block;
@@ -159,28 +177,29 @@ function click_logout() {
       }
     }
 
+    // 头像
     .avatar-container {
       margin-right: 30px;
-
-      // 头像
       .avatar-wrapper {
-        margin-top: 5px;
+        display: flex;
+        align-items: center;
         position: relative;
-
+        // margin-top: 5px;
+        cursor: pointer;
         .user-avatar {
-          cursor: pointer;
           width: 40px;
           height: 40px;
-          border-radius: 10px;
+          border-radius: 50%;
         }
-
+        > span {
+          display: inline-block;
+          margin-left: 5px;
+        }
         // 小图标
-        .el-icon-caret-bottom {
-          cursor: pointer;
-          position: absolute;
-          right: -20px;
-          top: 25px;
-          font-size: 12px;
+        .user-avatar-icon {
+          width: 15px;
+          height: 15px;
+          font-size: 12px !important;
         }
       }
     }
