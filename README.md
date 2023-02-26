@@ -1,18 +1,15 @@
-# Vue 3 + TypeScript + Vite
+## 简介
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Peak-Vue3-Admin 是一个基于 Vue-Element-Admin 升级的 Vue3 免费模板，并对项目整体进行了大量逻辑、结构、样式的重构和梳理，具备了一定规范的模块化开发，项目使用了 Vite3、Vue3、TypeScript、Pinia、Element-Plus 等目前最新技术栈开发，基于 mock 实现本地数据模拟具备规范接口请求，本项目对代码进行了大量的代码注释，以及对样式的分析和注释，既可以学习又可以基于模板二次开发，大大降低了开发和学习的成本。
 
-## Recommended IDE Setup
+## 功能
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- 使用 Vite3 构建项目、Vue3 + TypeScript 并使用了 setup 语法糖方式书写
+- 支持 i18n 国际化、页面结构配置
+- 完备的登录流程以及用户的权限校验、动态路由权限拦截、页面按钮权限
+- ...
 
-## Type Support For `.vue` Imports in TS
+## 代码仓库
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+-Gitee(https://gitee.com/Zhangpeak/Peak-Vue3-Admin)
+-GitHub(https://github.com/Iontheroad/Peak-Vue3-admin)
