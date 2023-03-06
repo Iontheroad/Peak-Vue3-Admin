@@ -27,7 +27,7 @@ function toggleSideBar() {
  * 点击退出登录
  */
 function click_logout() {
-  ElMessageBox.confirm("确定注销并退出系统吗？", "提示", {
+  ElMessageBox.confirm("确定注销并退出系统吗？", "温馨提示", {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
     type: "warning",

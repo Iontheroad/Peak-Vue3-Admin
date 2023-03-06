@@ -5,29 +5,39 @@
 import { defineStore } from "pinia";
 import { getUserInfoApi } from "@/api/user";
 import { reqLoginApi, reqLogoutApi } from "@/api/login";
-import { LoginData } from "@/api/login/login";
+import type { LoginData } from "@/api/login/login";
 import { getToken, removeToken, setToken } from "@/utils/cookie_token";
+
+/**
+ * 用户信息类型
+ */
+interface UserInfo {
+  avatar: string;
+  nickname: string;
+  perms: string[];
+  roles: Array<string>;
+  userId: number | string;
+}
 
 export const useUserStore = defineStore("userStore", {
   // id: "userStore",
   state: () => ({
     token: getToken(), // token
+    // 用户信息
     userInfo: {
       avatar: "", // 头像
       nickname: "", // 身份
       perms: [], //按钮权限字段
       roles: [], // 角色
       userId: "", // 用户id
-    } as {
-      avatar: string;
-      nickname: string;
-      perms: string[];
-      roles: Array<string>;
-      userId: number | string;
-    },
+    } as UserInfo,
   }),
   actions: {
-    // 点击登录
+    /**
+     * 点击登录
+     * @param data
+     * @returns
+     */
     async login_actions(data: LoginData) {
       try {
         let result = await reqLoginApi(data);
@@ -39,7 +49,10 @@ export const useUserStore = defineStore("userStore", {
       }
     },
 
-    //  获取 用户信息
+    /**
+     * 获取用户信息
+     * @returns
+     */
     async getUserInfo_actions() {
       try {
         let result = await getUserInfoApi(this.token as string);
@@ -50,7 +63,10 @@ export const useUserStore = defineStore("userStore", {
       }
     },
 
-    // 退出登录
+    /**
+     * 退出登录
+     * @returns
+     */
     async logout_actions() {
       try {
         const result = await reqLogoutApi();
@@ -62,7 +78,9 @@ export const useUserStore = defineStore("userStore", {
       }
     },
 
-    // 重置数据
+    /**
+     * 重置用户数据
+     */
     resetUser() {
       // 重置数据
       removeToken();

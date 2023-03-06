@@ -11,7 +11,6 @@ import { usePermissionStore } from "@/store/modules/permission";
 import { useAppStore } from "@/store/modules/app";
 import { useGlobalStore } from "@/store/index";
 
-// const settingsStore = useSettingsStore(); // 设置状态仓库
 const permissionStore = usePermissionStore(); // 权限路由状态仓库
 const appStore = useAppStore();
 const globalStore = useGlobalStore();
@@ -49,7 +48,7 @@ const activeMenu = computed<string>(() => {
       >
         <!-- 每一项菜单 -->
         <sidebar-item
-          v-for="route in permissionStore.routes"
+          v-for="route in permissionStore.menubarList_getters"
           :item="route"
           :key="route.path"
           :base-path="route.path"

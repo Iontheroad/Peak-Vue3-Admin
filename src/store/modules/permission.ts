@@ -1,17 +1,16 @@
 /**
- * 权限路由
- * 用户角色获取拥有权限的路由(静态路由+动态路由)
+ * 权限
+ *     通过用户的角色信息拿到最终的 异步路由菜单
  */
 import { defineStore } from "pinia";
 import { RouteRecordRaw } from "vue-router";
 import { constantRoutes } from "@/routers"; // 静态路由
-// import { getListRoutesApi } from "@/api/system/menu";
-import { getListRoutesApi } from "@/api/index";
+import { reqGetListRoutesApi } from "@/api/index";
 const modules = import.meta.glob("../../views/**/**.vue");
 const Layout = () => import("@/layout/index.vue");
 
 /**
- * 使用meta.role属性，以确定当前用户是否具有权限
+ * 使用meta.role属性，以确定用户是否具有该路由的权限
  * @param roles
  * @param route
  */
@@ -35,7 +34,7 @@ function hasPermission(roles: string[], route: RouteRecordRaw) {
 }
 
 /**
- * 通过递归过滤异步路由表
+ * 通过递归过滤异步路由表，得到最终的路由
  * @param routes 异步路由集合
  * @param roles  用户角色信息集合
  */
@@ -50,7 +49,7 @@ function filterAsyncRoutes(routes: RouteRecordRaw[], roles: string[]) {
       if (tmp.component == "Layout") {
         tmp.component = Layout;
       } else {
-        const component = modules[`../../views/${tmp.component}.vue`] as any;
+        const component = modules[`../../views/${tmp.component}.vue`];
         // const component = () => import(`../../views/${tmp.component}.vue`);
         if (component) {
           tmp.component = component;
@@ -70,31 +69,25 @@ function filterAsyncRoutes(routes: RouteRecordRaw[], roles: string[]) {
 }
 
 export const usePermissionStore = defineStore({
-  id: "permissionStore",
+  id: "usePermissionStore",
   state: () => ({
-    routes: [] as Array<RouteRecordRaw>, // 静态路由 + 动态路由
-    addRoutes: [] as RouteRecordRaw[], // 动态路由
+    // routes: [] as Array<RouteRecordRaw>, // 静态路由 + 动态路由
+    addRoutes: [] as RouteRecordRaw[], // 动态添加路由
   }),
   actions: {
-    // 设置路由
-    setRoutes(routes: RouteRecordRaw[]) {
-      // console.log(this, "jjjj");
-
-      this.addRoutes = routes; // 记录异步路由
-      // 静态路由 + 动态路由
-      this.routes = constantRoutes.concat(routes); // 合并静态和动态路由
-    },
-
-    // 获取异步路由
+    /**
+     * 获取异步路由
+     * @param roles 用户的角色信息
+     * @returns
+     */
     async getListRoutes_action(roles: string[]) {
       try {
-        // 获取动态路由
-        let result = await getListRoutesApi();
-        // console.log(result);
-
-        const asyncRoutes = result.data; // 拿到异步路由
-        let accessedRoutes = filterAsyncRoutes(asyncRoutes, roles); // 拿到遍历后的异步路由
-        this.setRoutes(accessedRoutes);
+        // 1.获取动态路由
+        let result = await reqGetListRoutesApi();
+        // 2.获取当前用户能访问的异步路由
+        let accessedRoutes = filterAsyncRoutes(result.data, roles);
+        // 3.将动态路由记录
+        this.addRoutes = accessedRoutes;
         return Promise.resolve(accessedRoutes);
       } catch (error) {
         return Promise.reject(error);
@@ -102,9 +95,13 @@ export const usePermissionStore = defineStore({
     },
   },
   getters: {
-    // routeList_getter(state) {
-    //   return state.routes;
-    // },
+    /**
+     * 获取动态路由
+     * @returns
+     */
+    menubarList_getters(state) {
+      return constantRoutes.concat(state.addRoutes);
+    },
   },
 });
 

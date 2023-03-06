@@ -80,7 +80,7 @@ function getBreadcrumb() {
          */
     return item.meta && item.meta.title && item.meta.breadcrumb !== false;
   });
-  // console.log(matched, this.levelList);
+  // console.log(matched, levelList.value);
 }
 
 /**

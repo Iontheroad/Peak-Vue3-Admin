@@ -14,13 +14,14 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
    *  VITE_APP_TITLE: 'vue3-element-admin',
    *  VITE_APP_PORT: '3000',
    *  VITE_APP_BASE_API: '/dev-api'
+   *  VITE_USER_NODE_ENV: 'development'|'production'
    * }
    */
   const env = loadEnv(mode, process.cwd());
-  // console.log(env);
 
   return {
-    base: "./",
+    // base: "./",
+    base: env.VITE_USER_NODE_ENV == "production" ? "/Peak-Vue3-Admin" : "/",
     resolve: {
       // 别名配置
       alias: {

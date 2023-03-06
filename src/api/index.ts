@@ -8,7 +8,7 @@ import request from "@/utils/request";
  * @param params
  * @returns
  */
-export function getListRoutesApi() {
+export function reqGetListRoutesApi() {
   // return request.get("sidebar", { params: { aa: "w" } });
   // params: { routeName: "get" },
   return request({

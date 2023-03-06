@@ -19,6 +19,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
+  background-color: #fafafa;
 }
 
 /* 如果导航栏固定，视图就加一些上返内边距 */

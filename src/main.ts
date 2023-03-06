@@ -6,7 +6,7 @@ import "./mocks/index.ts"; // 使用mock
 const app = createApp(App);
 /* 路由 */
 import router from "@/routers";
-import "@/routers/auth"; // 路由拦截认证
+// import "@/routers/auth"; // 路由拦截认证
 
 /* element */
 import "element-plus/dist/index.css";

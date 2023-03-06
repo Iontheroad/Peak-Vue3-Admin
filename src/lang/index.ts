@@ -24,8 +24,6 @@ const messages = {
  * @returns zh-cn|en ...
  */
 export const getLanguage = () => {
-  console.log("只执行一次");
-
   // 获取本地缓存的语言
   let language = localStorage.get("language");
   if (language) {

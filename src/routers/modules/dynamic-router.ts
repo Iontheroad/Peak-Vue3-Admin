@@ -1,26 +1,34 @@
-import { RouteRecordRaw } from "vue-router";
 /**
- * dynamic 动态路由
+ * dynamic 异步动态路由
+ *     添加动态路由菜单
  */
+import router from "@/routers";
+import { notFoundRoute } from "@/routers/modules/static-router";
+import { usePermissionStore } from "@/store/modules/permission";
+import { useUserStore } from "@/store/modules/user"; // 用户状态仓库
 
-const Layout = () => import("@/layout/index.vue");
+/**
+ * 初始化 添加异步路由信息
+ * @param roles  用户角色信息集合
+ */
+export const initDynamicRoute = async (roles: string[]) => {
+  const permissionStore = usePermissionStore();
+  const userStore = useUserStore();
 
-export const dynamicRoute: RouteRecordRaw[] = [
-  {
-    // 首页
-    path: "/",
-    component: Layout,
-    redirect: "/dashboard",
-    children: [
-      {
-        path: "dashboard",
-        name: "Dashboard",
-        component: () => import("@/views/dashboard/index.vue"),
-        meta: {
-          title: "Dashboard",
-          icon: "dashboard",
-        },
-      },
-    ],
-  },
-];
+  try {
+    // 1.获取异步路由菜单
+    await permissionStore.getListRoutes_action(roles);
+    let addRoutes = permissionStore.addRoutes;
+    // 2.遍历异步路由添加
+    addRoutes.forEach((item) => {
+      router.addRoute(item);
+    });
+    // 3.最后添加 notFoundRoute
+    router.addRoute(notFoundRoute);
+  } catch (error) {
+    //  当菜单请求出错时，重定向到登陆页
+    userStore.resetUser();
+    router.replace("/login");
+    return Promise.reject(error);
+  }
+};

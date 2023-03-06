@@ -3,7 +3,6 @@
  * @interface username:string
  * @interface password:string
  */
-
 export interface LoginData {
   username: string;
   password: string;

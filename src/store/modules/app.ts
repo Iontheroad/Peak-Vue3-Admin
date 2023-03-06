@@ -8,16 +8,10 @@ import {
   setSidebarStatus,
   getSize,
   setSize,
-  setLanguage,
 } from "@/utils/localStorage"; // 本地存储
 import { defineStore } from "pinia";
-import { getLanguage } from "@/lang/index";
 import { computed, reactive, ref } from "vue";
 import { useStorage } from "@vueuse/core";
-
-// Element Plus 语言包
-import zhCn from "element-plus/es/locale/lang/zh-cn";
-import en from "element-plus/es/locale/lang/en";
 
 export enum DeviceType {
   mobile,
@@ -42,16 +36,6 @@ export const useAppStore = defineStore("app", () => {
   // pc：desktop    移动： mobile 窗口宽度小于992
   const device = useStorage<string>("device", "desktop"); //默认pc  自动存取
   const size = ref(getSize() || "default"); // 布局大小
-
-  /** 判断语言包 */
-  const language = ref(getLanguage()); // 获取语言
-  const locale = computed(() => {
-    if (language?.value == "en") {
-      return en;
-    } else {
-      return zhCn;
-    }
-  });
 
   // actions
 
@@ -97,31 +81,20 @@ export const useAppStore = defineStore("app", () => {
   }
 
   /**
-   * 更换大小
+   * 更换主题大小
    * @param val(default | large | small)
    */
   function changeSize(val: string) {
     size.value = val;
     setSize(val);
   }
-  /**
-   * 更换语言
-   * @param val(zh-cn | en)
-   */
-  function changeLanguage(val: string) {
-    language.value = val;
-    setLanguage(val);
-  }
 
   return {
     device,
     sidebar,
-    language,
-    locale,
     size,
     toggleDevice,
     changeSize,
-    changeLanguage,
     toggleSidebar,
     closeSideBar,
     openSideBar,
