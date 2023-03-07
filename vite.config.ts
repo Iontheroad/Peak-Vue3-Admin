@@ -22,7 +22,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
 
   return {
     // base: "./",
-    base: env.VITE_USER_NODE_ENV == "production" ? "/Peak-Vue3-Admin" : "/",
+    base: env.VITE_USER_NODE_ENV == "production" ? "/peak-vue3-admin" : "/",
     resolve: {
       // 别名配置
       alias: {
