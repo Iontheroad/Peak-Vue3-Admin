@@ -91,14 +91,14 @@ function click_logout() {
             <!-- GitHub -->
             <a
               target="_blank"
-              href="https://github.com/Iontheroad/Peak-Vue3-admin"
+              href="https://github.com/Iontheroad/Peak-Vue3-Admin"
             >
               <el-dropdown-item>Github</el-dropdown-item>
             </a>
             <!-- Gitee -->
             <a
               target="_blank"
-              href="https://gitee.com/Zhangpeak/Peak-Vue3-Admin"
+              href="https://gitee.com/Iontheroad/peak-vue3-admin"
             >
               <el-dropdown-item>Gitee</el-dropdown-item>
             </a>

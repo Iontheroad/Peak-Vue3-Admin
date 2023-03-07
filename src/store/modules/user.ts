@@ -3,9 +3,8 @@
  * 用户状态模块
  */
 import { defineStore } from "pinia";
-import { getUserInfoApi } from "@/api/user";
-import { reqLoginApi, reqLogoutApi } from "@/api/login";
-import type { LoginData } from "@/api/login/login";
+import { reqLoginApi, reqLogoutApi, reqGetUserInfoApi } from "@/api/user";
+import type { LoginData } from "@/api/user/type";
 import { getToken, removeToken, setToken } from "@/utils/cookie_token";
 
 /**
@@ -55,7 +54,7 @@ export const useUserStore = defineStore("userStore", {
      */
     async getUserInfo_actions() {
       try {
-        let result = await getUserInfoApi(this.token as string);
+        let result = await reqGetUserInfoApi(this.token as string);
         this.userInfo = result.data;
         return Promise.resolve(result);
       } catch (error) {

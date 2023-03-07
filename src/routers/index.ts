@@ -85,7 +85,7 @@ const router = createRouter({
   // 刷新时，滚动条位置还原
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
-
+import { getToken, removeToken, setToken } from "@/utils/cookie_token";
 // 全局前置守卫
 router.beforeEach(async (to, form, next) => {
   NProgress.start(); // 开始进度条
@@ -93,6 +93,8 @@ router.beforeEach(async (to, form, next) => {
   let title = import.meta.env.VITE_APP_TITLE;
   document.title = to.meta.title ? `${to.meta.title} - ${title}` : title; // 动态标题
 
+  // const hasToken = getToken(); // 获取token
+  // HACK: token过期后，点击的页面没有接口不回跳转到登录页
   const hasToken = userStore.token; // 获取token
   //  判断是否登录
   if (hasToken) {

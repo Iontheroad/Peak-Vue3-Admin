@@ -5,6 +5,7 @@ import path from "path";
 import AutoImport from "unplugin-auto-import/vite"; // 按需导入api
 import Components from "unplugin-vue-components/vite"; // 按需导入组件
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers"; // Element Plus的解析器
+import { viteMockServe } from "vite-plugin-mock";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
@@ -36,7 +37,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       port: 3000,
       open: true, // 是否自动打开浏览器
       proxy: {
-        [env.VITE_APP_BASE_API]: {
+        ["/dev-api"]: {
           // target: "https://api.youlai.tech", // 后端接口地址
           // target: "https://vue3.youlai.tech", // 后端接口地址
           target: "http://vapi.youlai.tech", // 后端接口地址
@@ -70,6 +71,15 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       // 按需组件自动导入Vue。
       Components({
         resolvers: [ElementPlusResolver()],
+      }),
+      viteMockServe({
+        mockPath: "./src/mocks",
+        localEnabled: command == "serve", // 设置是否启用本地模拟.ts文件，不要在生产环境中打开
+        prodEnabled: command !== "serve", // 控制mock打包到最终代码内
+        injectCode: `
+        import { setupProdMockServer } from './mocks/index';
+        setupProdMockServer();
+        `,
       }),
     ],
   };

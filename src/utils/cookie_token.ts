@@ -12,9 +12,9 @@ export function getToken() {
 
 export function setToken(token: string) {
   let seconds = 10; // 10秒过期
-  // let expires = new Date(+new Date() * 1 + seconds * 1000);
+  let expires = new Date(+new Date() * 1 + seconds * 1000);
   return Cookies.set(TokenKey, token, {
-    expires: 7,
+    expires: 7, // 7 days
   });
 }
 export function removeToken() {

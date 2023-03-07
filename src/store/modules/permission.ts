@@ -5,7 +5,7 @@
 import { defineStore } from "pinia";
 import { RouteRecordRaw } from "vue-router";
 import { constantRoutes } from "@/routers"; // 静态路由
-import { reqGetListRoutesApi } from "@/api/index";
+import { reqGetRouteListApi } from "@/api/user";
 const modules = import.meta.glob("../../views/**/**.vue");
 const Layout = () => import("@/layout/index.vue");
 
@@ -83,7 +83,7 @@ export const usePermissionStore = defineStore({
     async getListRoutes_action(roles: string[]) {
       try {
         // 1.获取动态路由
-        let result = await reqGetListRoutesApi();
+        let result = await reqGetRouteListApi();
         // 2.获取当前用户能访问的异步路由
         let accessedRoutes = filterAsyncRoutes(result.data, roles);
         // 3.将动态路由记录
