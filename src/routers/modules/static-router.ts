@@ -27,7 +27,7 @@ export const staticRoute: Array<RouteRecordRaw> = [
         component: () => import("@/views/dashboard/index.vue"),
         meta: {
           title: "dashboard",
-          icon: "dashboard",
+          icon: "menu-home",
         },
       },
     ],

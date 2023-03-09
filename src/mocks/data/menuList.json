@@ -6,7 +6,7 @@
     "component": "Layout",
     "meta": {
       "title": "系统管理",
-      "icon": "system",
+      "icon": "menu-system",
       "roles": ["ADMIN"],
       "isAlwaysShow": true,
       "isKeepAlive": true
@@ -18,7 +18,7 @@
         "component": "system/user/index",
         "meta": {
           "title": "用户管理",
-          "icon": "user",
+          "icon": "menu-user",
           "roles": ["ADMIN"],
           "isAlwaysShow": false
         }
@@ -29,7 +29,7 @@
         "component": "system/role/index",
         "meta": {
           "title": "角色管理",
-          "icon": "role",
+          "icon": "menu-role",
           "roles": ["ADMIN"],
           "isAlwaysShow": false
         }
@@ -40,7 +40,7 @@
         "component": "system/menu/index",
         "meta": {
           "title": "菜单管理",
-          "icon": "menu",
+          "icon": "menu-menu",
           "roles": ["ADMIN"],
           "isAlwaysShow": false,
           "isKeepAlive": true
@@ -52,7 +52,7 @@
         "component": "system/dept/index",
         "meta": {
           "title": "部门管理",
-          "icon": "tree",
+          "icon": "menu-tree",
           "roles": ["ADMIN"],
           "isAlwaysShow": false,
           "isKeepAlive": true
@@ -64,7 +64,7 @@
         "component": "system/dict/index",
         "meta": {
           "title": "字典管理",
-          "icon": "dict",
+          "icon": "menu-dict",
           "roles": ["ADMIN"],
           "isKeepAlive": true
         }
@@ -78,7 +78,7 @@
     "component": "Layout",
     "meta": {
       "title": "多级菜单",
-      "icon": "multi_menu",
+      "icon": "menu-multi-menu",
       "roles": ["ADMIN"],
       "isKeepAlive": true
     },
@@ -90,7 +90,7 @@
         "redirect": "/nested/menu1/menu11",
         "meta": {
           "title": "menu1",
-          "icon": "menu1",
+          "icon": "menu-multi-menu",
           "roles": ["ADMIN"],
           "isAlwaysShow": true,
           "isKeepAlive": true
@@ -102,7 +102,7 @@
             "component": "nested/menu1/menu11/index",
             "meta": {
               "title": "menu11",
-              "icon": "menu11",
+              "icon": "menu-multi-menu",
               "roles": ["ADMIN"],
               "isKeepAlive": true
             }
@@ -114,7 +114,7 @@
             "redirect": "/nested/menu1/menu12/menu121",
             "meta": {
               "title": "menu12",
-              "icon": "menu12",
+              "icon": "menu-multi-menu",
               "roles": ["ADMIN"],
               "isKeepAlive": true,
               "isAlwaysShow": true
@@ -126,7 +126,7 @@
                 "component": "nested/menu1/menu12/menu121/index",
                 "meta": {
                   "title": "menu121",
-                  "icon": "menu121",
+                  "icon": "menu-multi-menu",
                   "roles": ["ADMIN"],
                   "isKeepAlive": true
                 }
@@ -137,7 +137,7 @@
                 "component": "nested/menu1/menu12/menu122/index",
                 "meta": {
                   "title": "menu122",
-                  "icon": "menu122",
+                  "icon": "menu-multi-menu",
                   "roles": ["ADMIN"],
                   "isKeepAlive": true
                 }
@@ -152,7 +152,7 @@
         "component": "nested/menu2/index",
         "meta": {
           "title": "menu2",
-          "icon": "menu2",
+          "icon": "menu-multi-menu",
           "roles": ["ADMIN"],
           "isKeepAlive": true
         }
@@ -165,8 +165,8 @@
     "component": "Layout",
     "redirect": "/superTable/tableVerify",
     "meta": {
-      "title": "表格组件",
-      "icon": "table",
+      "title": "超级表格",
+      "icon": "menu-table",
       "roles": ["ADMIN"],
       "isAlwaysShow": true,
       "isKeepAlive": true
@@ -177,8 +177,45 @@
         "name": "TableVerify",
         "component": "superTable/tableVerify/index",
         "meta": {
-          "title": "表格组件",
-          "icon": "tableVerify",
+          "title": "普通表格",
+          "icon": "menu-table",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      }
+    ]
+  },
+  {
+    "path": "/func",
+    "name": "Func",
+    "component": "Layout",
+    "redirect": "/Func/gridLayout",
+    "meta": {
+      "title": "功能组件",
+      "icon": "menu-function",
+      "roles": ["ADMIN"],
+      "isAlwaysShow": true,
+      "isKeepAlive": true
+    },
+    "children": [
+      {
+        "path": "draggableLayout",
+        "name": "DraggableLayout",
+        "component": "func/draggableLayout/index",
+        "meta": {
+          "title": "拖拽布局组件",
+          "icon": "menu-function-move",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      },
+      {
+        "path": "draggable",
+        "name": "Draggable",
+        "component": "func/draggable/index",
+        "meta": {
+          "title": "拖拽组件",
+          "icon": "menu-function-move",
           "roles": ["ADMIN"],
           "isKeepAlive": true
         }

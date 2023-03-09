@@ -6,7 +6,8 @@ import AutoImport from "unplugin-auto-import/vite"; // 按需导入api
 import Components from "unplugin-vue-components/vite"; // 按需导入组件
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers"; // Element Plus的解析器
 import { viteMockServe } from "vite-plugin-mock";
-
+// 增加 vue文件 script name值
+import vueSetupExtend from "vite-plugin-vue-setup-extend";
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   /**
@@ -34,19 +35,16 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       host: "0.0.0.0", // 指定服务器应该监听哪个 IP 地址。 如果将此设置为 0.0.0.0 或者 true 将监听所有地址，包括局域网和公网地址。
       // port: Number(env.VITE_APP_PORT), // 指定开发服务器端口。注意：如果端口已经被使用，Vite 会自动尝试下一个可用的端口，所以这可能不是开发服务器最终监听的实际端口。
-      port: 3000,
+      port: Number(env.VITE_APP_PORT),
       open: true, // 是否自动打开浏览器
       proxy: {
-        ["/dev-api"]: {
-          // target: "https://api.youlai.tech", // 后端接口地址
-          // target: "https://vue3.youlai.tech", // 后端接口地址
-          target: "http://vapi.youlai.tech", // 后端接口地址
+        [env.VITE_APP_BASE_API]: {
+          target: "http://xxxxx", // 不使用mock的话 换成真正的代理接口 后端接口地址
           changeOrigin: true,
           rewrite: (path) => {
-            // console.log(path, "==请求路径==");
             // 重写请求路径
             return path.replace(new RegExp(`^${env.VITE_APP_BASE_API}`), "");
-            // return path.replace(/^env.VITE_APP_BASE_API/, ""); // 待定
+            // return path.replace(/^env.VITE_APP_BASE_API/, "");
           },
         },
       },
@@ -57,6 +55,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
      */
     plugins: [
       vue(),
+      vueSetupExtend(),
       // 使用 svg 图标
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹

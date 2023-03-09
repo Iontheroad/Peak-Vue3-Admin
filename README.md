@@ -11,5 +11,19 @@ Peak-Vue3-Admin 是一个基于 Vue-Element-Admin 升级的 Vue3 免费模板，
 
 ## 代码仓库
 
--Gitee(https://gitee.com/Zhangpeak/Peak-Vue3-Admin)
--GitHub(https://github.com/Iontheroad/Peak-Vue3-admin)
+- Gitee(https://gitee.com/Iontheroad/peak-vue3-admin)
+- GitHub(https://github.com/Iontheroad/Peak-Vue3-admin)
+
+## 演示地址
+
+- https://iontheroad.gitee.io/peak-vue3-admin
+
+## 安装
+
+[^注意事项]: node 版本 16 以上
+
+```shell
+git clone https://github.com/Iontheroad/Peak-Vue3-admin)
+npm install
+npm run dev
+```
