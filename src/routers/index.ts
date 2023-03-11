@@ -79,6 +79,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
   ...errorRoute,
 ];
 
+// 创建路由器
 const router = createRouter({
   history: createWebHashHistory(),
   routes: constantRoutes,
@@ -86,6 +87,7 @@ const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 import { getToken, removeToken, setToken } from "@/utils/cookie_token";
+
 // 全局前置守卫
 router.beforeEach(async (to, form, next) => {
   NProgress.start(); // 开始进度条

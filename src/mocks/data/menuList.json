@@ -72,6 +72,139 @@
     ]
   },
   {
+    "path": "/superTable",
+    "name": "table",
+    "component": "Layout",
+    "redirect": "/superTable/tableVerify",
+    "meta": {
+      "title": "超级表格",
+      "icon": "menu-table",
+      "roles": ["ADMIN"],
+      "isAlwaysShow": true,
+      "isKeepAlive": true
+    },
+    "children": [
+      {
+        "path": "tableVerify",
+        "name": "TableVerify",
+        "component": "superTable/tableVerify/index",
+        "meta": {
+          "title": "普通表格",
+          "icon": "menu-table",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      }
+    ]
+  },
+  {
+    "path": "/func",
+    "name": "Func",
+    "component": "Layout",
+    "redirect": "/Func/gridLayout",
+    "meta": {
+      "title": "功能组件",
+      "icon": "menu-function",
+      "roles": ["ADMIN"],
+      "isAlwaysShow": true,
+      "isKeepAlive": true
+    },
+    "children": [
+      {
+        "path": "draggableLayout",
+        "name": "DraggableLayout",
+        "component": "func/draggableLayout/index",
+        "meta": {
+          "title": "拖拽布局组件",
+          "icon": "menu-function-move",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      },
+      {
+        "path": "draggable",
+        "name": "Draggable",
+        "component": "func/draggable/index",
+        "meta": {
+          "title": "拖拽组件",
+          "icon": "menu-function-move",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      }
+    ]
+  },
+  {
+    "path": "/echarts",
+    "name": "Echarts",
+    "component": "Layout",
+    "redirect": "/echarts/pieEcharts",
+    "meta": {
+      "title": "Echarts",
+      "icon": "menu-echarts",
+      "roles": ["ADMIN"],
+      "isAlwaysShow": true,
+      "isKeepAlive": true
+    },
+    "children": [
+      {
+        "path": "pieEcharts",
+        "name": "PieEcharts",
+        "component": "echarts/pieEcharts/index",
+        "meta": {
+          "title": "饼图",
+          "icon": "menu-echarts-pie",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      },
+      {
+        "path": "lineEcharts",
+        "name": "LineEcharts",
+        "component": "echarts/lineEcharts/index",
+        "meta": {
+          "title": "折线图",
+          "icon": "menu-echarts-line",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      },
+      {
+        "path": "barEcharts",
+        "name": "BarEcharts",
+        "component": "echarts/barEcharts/index",
+        "meta": {
+          "title": "柱状图",
+          "icon": "menu-echarts-bar",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      },
+      {
+        "path": "toggleEcharts",
+        "name": "ToggleEcharts",
+        "component": "echarts/toggleEcharts/index",
+        "meta": {
+          "title": "图表切换",
+          "icon": "menu-echarts-toggle",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      },
+      {
+        "path": "multipleEcharts",
+        "name": "MultipleEcharts",
+        "component": "echarts/multipleEcharts/index",
+        "meta": {
+          "title": "多个图表",
+          "icon": "menu-echarts-multiple",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      }
+    ]
+  },
+  {
     "path": "/nested",
     "name": "Nested",
     "redirect": "/nested/menu2",
@@ -153,69 +286,6 @@
         "meta": {
           "title": "menu2",
           "icon": "menu-multi-menu",
-          "roles": ["ADMIN"],
-          "isKeepAlive": true
-        }
-      }
-    ]
-  },
-  {
-    "path": "/superTable",
-    "name": "table",
-    "component": "Layout",
-    "redirect": "/superTable/tableVerify",
-    "meta": {
-      "title": "超级表格",
-      "icon": "menu-table",
-      "roles": ["ADMIN"],
-      "isAlwaysShow": true,
-      "isKeepAlive": true
-    },
-    "children": [
-      {
-        "path": "tableVerify",
-        "name": "TableVerify",
-        "component": "superTable/tableVerify/index",
-        "meta": {
-          "title": "普通表格",
-          "icon": "menu-table",
-          "roles": ["ADMIN"],
-          "isKeepAlive": true
-        }
-      }
-    ]
-  },
-  {
-    "path": "/func",
-    "name": "Func",
-    "component": "Layout",
-    "redirect": "/Func/gridLayout",
-    "meta": {
-      "title": "功能组件",
-      "icon": "menu-function",
-      "roles": ["ADMIN"],
-      "isAlwaysShow": true,
-      "isKeepAlive": true
-    },
-    "children": [
-      {
-        "path": "draggableLayout",
-        "name": "DraggableLayout",
-        "component": "func/draggableLayout/index",
-        "meta": {
-          "title": "拖拽布局组件",
-          "icon": "menu-function-move",
-          "roles": ["ADMIN"],
-          "isKeepAlive": true
-        }
-      },
-      {
-        "path": "draggable",
-        "name": "Draggable",
-        "component": "func/draggable/index",
-        "meta": {
-          "title": "拖拽组件",
-          "icon": "menu-function-move",
           "roles": ["ADMIN"],
           "isKeepAlive": true
         }

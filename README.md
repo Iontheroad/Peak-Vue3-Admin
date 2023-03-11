@@ -7,7 +7,9 @@ Peak-Vue3-Admin 是一个基于 Vue-Element-Admin 升级的 Vue3 免费模板，
 - 使用 Vite3 构建项目、Vue3 + TypeScript 并使用了 setup 语法糖方式书写
 - 支持 i18n 国际化、页面结构配置
 - 完备的登录流程以及用户的权限校验、动态路由权限拦截、页面按钮权限
-- ...
+- 本地mock数据，高效规范开发
+- 拖动组件，ECharts可视化图表
+- 功能不断迭代...
 
 ## 代码仓库
 
@@ -23,7 +25,15 @@ Peak-Vue3-Admin 是一个基于 Vue-Element-Admin 升级的 Vue3 免费模板，
 [^注意事项]: node 版本 16 以上
 
 ```shell
-git clone https://github.com/Iontheroad/Peak-Vue3-admin)
+git clone https://github.com/Iontheroad/Peak-Vue3-admin
 npm install
 npm run dev
 ```
+
+## 分支管理
+
+**处于开发状态，预览项目请切换 dev_zgf**
+
+- main: 最终预览版(代码相对 dev_zgf 落后较大)
+- dev_zgf: 功能开发迭代分支(最新)
+- pages: 静态资源部署
