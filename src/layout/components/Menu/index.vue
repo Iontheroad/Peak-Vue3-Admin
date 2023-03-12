@@ -3,10 +3,11 @@ import { computed } from "vue";
 import { useRoute } from "vue-router";
 // import { storeToRefs } from "pinia";
 
-import SidebarItem from "./SidebarItem.vue";
-import Logo from "./Logo.vue";
-
 import variables from "@/styles/variables.module.scss";
+// 组件
+import SidebarItem from "./SidebarItem.vue";
+import Logo from "./components/Logo.vue";
+// store
 import { usePermissionStore } from "@/store/modules/permission";
 import { useAppStore } from "@/store/modules/app";
 import { useGlobalStore } from "@/store/index";
@@ -31,7 +32,10 @@ const activeMenu = computed<string>(() => {
 
 <template>
   <!-- has-logo类： 当logo显示就会腾出高度给logo -->
-  <div :class="{ 'has-logo': isShowLogo }">
+  <div
+    class="sidebar-container menu_container"
+    :class="{ 'has-logo': isShowLogo }"
+  >
     <!-- 是否显示Logo组件，默认不显示 -->
     <logo v-if="isShowLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
@@ -58,3 +62,6 @@ const activeMenu = computed<string>(() => {
     </el-scrollbar>
   </div>
 </template>
+<style lang="scss">
+@use "./index.scss";
+</style>

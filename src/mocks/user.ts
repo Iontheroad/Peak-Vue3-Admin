@@ -75,8 +75,8 @@ export default [
         data: {
           userId: 2,
           nickname: "系统管理员",
-          avatar: "https://i.postimg.cc/ZRjX6bc7/image.jpg",
-          // avatar: "https://s2.loli.net/2022/04/07/gw1L2Z5sPtS8GIl.gif",
+          avatar:
+            "https://img0.baidu.com/it/u=4100351681,3622422042&fm=253&fmt=auto&app=138&f=JPEG?w=300&h=300",
           roles: ["ADMIN"],
           perms: ["sys:user:edit", "sys:user:delete", "sys:user:add"],
           userInfo: {

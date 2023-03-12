@@ -1,21 +1,23 @@
-<script lang="ts" setup name="Navbar">
+<script lang="ts" setup name="Header">
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { CaretBottom } from "@element-plus/icons-vue";
 import Breadcrumb from "@/components/Breadcrumb/index.vue";
 import Hamburger from "@/components/Hamburger/index.vue";
-import Language from "./Header/Language.vue";
+import Language from "./components/Language.vue";
 
 import { useAppStore } from "@/store/modules/app";
 import { useUserStore } from "@/store/modules/user";
+import { useGlobalStore } from "@/store/index";
 const router = useRouter();
 const appStore = useAppStore();
 const userStore = useUserStore();
+const globalStore = useGlobalStore();
 
 const sidebar = computed(() => appStore.sidebar); // 菜单栏状态
 const avatar = computed(() => userStore.userInfo.avatar); // 头像
-
+const isFixedHeader = computed(() => globalStore.themeConfig.isFixedHeader); // 是否固定表头
 /**
  * 点击展开收起状态栏
  */
@@ -58,7 +60,7 @@ function click_logout() {
 </script>
 
 <template>
-  <div class="navbar">
+  <div class="header_container">
     <div class="left-menu">
       <!-- 点击展开收起的按钮 -->
       <Hamburger
@@ -121,7 +123,7 @@ function click_logout() {
 </template>
 
 <style lang="scss" scoped>
-.navbar {
+.header_container {
   display: flex;
   justify-content: space-between;
   height: 50px; // 导航栏高度

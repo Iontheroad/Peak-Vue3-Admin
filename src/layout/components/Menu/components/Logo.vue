@@ -1,6 +1,6 @@
 <template>
   <!-- 此处class类(collapse) 用于清除 收起时logo的右侧外边距 -->
-  <div class="sidebar-logo-container" :class="{ collapse: collapse }">
+  <div class="logo_container" :class="{ collapse: collapse }">
     <!-- 动画 -->
     <transition name="sidebarLogoFade">
       <!-- 收起 -->
@@ -29,15 +29,11 @@ defineProps<{
 }>();
 
 let title = ref("Peak Vue3 Admin");
-// let logo = ref(
-//   "https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png"
-// );
 const logo = ref<string>(new URL(`@/assets/logo.png`, import.meta.url).href);
-// console.log(logos);
 </script>
 
 <style lang="scss" scoped>
-.sidebar-logo-container {
+.logo_container {
   position: relative;
   width: 100%;
   height: 50px;

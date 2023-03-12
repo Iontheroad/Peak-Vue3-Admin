@@ -1,0 +1,287 @@
+
+// @use "@/styles/variables.module.scss" as variables;
+@import "@/styles/variables.module.scss";
+#app {
+  //  TODO: 拆分样式
+
+  // 右侧主体
+  .main-container {
+    min-height: 100%;
+    // 菜单栏收起，右侧主体
+    transition: margin-left .28s;
+    // transition: width .28s;
+    margin-left: $sideBarWidth; // 默认右侧主体区域的left值
+    position: relative;
+  }
+
+  // 左侧菜单栏
+  .sidebar-container {
+    transition: width 0.28s; // 展开收起过度
+    width: $sideBarWidth !important; // 菜单栏默认宽度
+    background-color: $menuBg; // 根菜单栏背景颜色
+    height: 100%;
+    position: fixed;
+    font-size: 0px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
+
+    // reset element-ui css
+    .horizontal-collapse-transition {
+      transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    }
+
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+    }
+
+    .el-scrollbar__bar.is-vertical {
+      right: 0px;
+    }
+
+    .el-scrollbar {
+      height: 100%;
+    }
+
+    // logo显示后，给logo腾出高度
+    &.has-logo {
+      .el-scrollbar {
+        height: calc(100% - 50px);
+      }
+    }
+
+    .is-horizontal {
+      display: none;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    // 自定义 icon
+    .svg-icon {
+      margin-right: 16px;
+    }
+
+    // element icon
+    .sub-el-icon {
+      margin-right: 12px;
+      margin-left: -2px;
+    }
+
+    // 菜单栏自带的默认样式 清除
+    .el-menu {
+      border: none;
+      height: 100%;
+      width: 100% !important;
+    }
+
+    // menu hover 鼠标移入根菜单的背景
+    /*submenu-title-noDropdown : 单个子路由的转化根路由，添加的自定义class
+    el-submenu__title ： 两个及以上子路由的根路由element自带的class
+     */
+    .submenu-title-noDropdown,
+    .el-sub-menu__title {
+      &:hover {
+        background-color: $menuHover !important;
+      }
+    }
+
+    // 选中子菜单，跟菜单的字体颜色
+    .is-active>.el-sub-menu__title {
+      color: $subMenuActiveText !important;
+    }
+
+    /* 
+    前： 根菜单(爷)的子菜单(父)嵌套的还有子菜单(相对于根菜单就是孙菜单)，前半段选择器指的就是这个父菜单自身
+    后：除了根菜单，没有嵌套菜单的菜单
+    */
+    & .nest-menu .el-sub-menu>.el-sub-menu__title,
+    & .el-sub-menu .el-menu-item {
+      min-width: $sideBarWidth !important; // 默认宽度
+      background-color: $subMenuBg !important; // 子菜单背景颜色
+
+      &:hover {
+        // 移入的子菜单背景颜色
+        background-color: $subMenuHover !important;
+      }
+    }
+  }
+
+
+  /* 收起菜单 */
+  .hideSidebar {
+    .sidebar-container {
+      width: 54px !important; // 收起的菜单宽度
+    }
+
+    // 收起菜单，右侧主体区域的left值
+    .main-container {
+      margin-left: 54px;
+    }
+
+    // 收起菜单，自定义根路由 样式
+    .submenu-title-noDropdown {
+      padding: 0 !important;
+      position: relative;
+
+      .el-tooltip__trigger {
+        padding: 0 !important;
+
+        // 自定义的svg
+        .svg-icon {
+          margin-left: 20px;
+        }
+        .svg-icon {
+          margin-right: 0px;
+        }
+        // element 自带的
+        .sub-el-icon {
+          margin-left: 19px;
+        }
+      }
+    }
+    // 收起菜单， 嵌套根路由
+    .el-sub-menu {
+      overflow: hidden;
+
+      &>.el-sub-menu__title {
+        padding: 0 !important;
+
+        .svg-icon {
+          margin-left: 20px;
+        }
+
+        .sub-el-icon {
+          margin-left: 19px;
+        }
+        // 嵌套路由的 小箭头
+        .el-sub-menu__icon-arrow {
+          display: none;
+        }
+      }
+    }
+    // 收起后隐藏跟菜单的title,腾出小图标位置
+    .el-menu--collapse {
+      .el-sub-menu {
+        &>.el-sub-menu__title {
+          &>span {
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  //  TAG: 未知 展示感觉没啥用
+  .el-menu--collapse .el-menu .el-sub-menu {
+    min-width: $sideBarWidth !important;
+  }
+
+  /* mobile responsive 移动响应 */
+  .mobile {
+    // 移动端情况下，右侧主体右侧外边距为0，占据全屏
+    .main-container {
+      margin-left: 0px;
+    }
+
+    // 移动端，侧边栏宽度
+    .sidebar-container {
+      transition: transform .28s;
+      // width: $sideBarWidth !important;
+    }
+
+    &.hideSidebar {
+      //移动端 侧边栏 隐藏后的动画
+      .sidebar-container {
+        pointer-events: none;
+        transition-duration: 0.3s;
+        transform: translate3d(-$sideBarWidth, 0, 0);
+      }
+    }
+  }
+
+
+  /* 移动端切换到 侧边栏半展开状态 时的动画关闭 */
+  .withoutAnimation {
+
+    .main-container,
+    .sidebar-container {
+      transition: none;
+    }
+  }
+}
+
+/* when menu collapsed 半收起状态 */
+.el-menu--vertical {
+  &>.el-menu {
+    // 半收起菜单的子菜单的 自定义icon
+    .svg-icon {
+      margin-right: 16px;
+    }
+    .sub-el-icon {
+      margin-right: 12px;
+      margin-left: -2px;
+    }
+  }
+
+  // 鼠标移入子菜单背景
+  .nest-menu .el-sub-menu>.el-sub-menu__title,
+  .el-menu-item {
+    &:hover {
+      // you can use $subMenuHover
+      background-color: $menuHover !important;
+    }
+  }
+
+  // the scroll bar appears when the subMenu is too long
+  // 当子菜单过长时，滚动条会出现
+  >.el-menu--popup {
+    max-height: 100vh; // 最高就是窗口的高度
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-track-piece {
+      background: #d3dce6;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #99a9bf;
+      border-radius: 20px;
+    }
+  }
+}
+
+
+body[layout="mix"] {
+
+  .horizontal-header{
+    .el-menu-item{
+      height: 50px!important;
+      line-height: 50px!important;
+    }
+
+    .el-sub-menu__title {
+      background-color: #001529!important;
+      height: 50px!important;
+    }
+  }
+  .horizontal-header-right>div {
+    color: #FFF;
+  }
+  .svg-icon{
+    margin-right: 16px;
+  }
+
+}
