@@ -6,7 +6,7 @@ import { RouteRecordRaw } from "vue-router";
 /**
  * staticRoute 静态路由
  */
-export const staticRoute: Array<RouteRecordRaw> = [
+export const staticRoute = [
   {
     path: "/login",
     name: "Login",
@@ -28,6 +28,7 @@ export const staticRoute: Array<RouteRecordRaw> = [
         meta: {
           title: "dashboard",
           icon: "menu-home",
+          isAffix: true,
         },
       },
     ],
@@ -57,7 +58,7 @@ export const errorRoute = [
 /**
  * notFoundRoute （找不到路由）
  */
-export const notFoundRoute: RouteRecordRaw = {
+export const notFoundRoute = {
   // 统一处理
   path: "/:pathMatch(.*)*",
   redirect: "/404",

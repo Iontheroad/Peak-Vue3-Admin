@@ -1,15 +1,9 @@
-@import 'src/styles/variables.module';
-@import 'src/styles/element-plus';
-// @import './sidebar.scss';
+@use 'src/styles/variables.module.scss';
+// @import 'src/styles/element-plus';
 // @import './tailwind.scss';
 
 html,body,#app{
   height: 100%;
-}
-
-// main-container global css
-.app-container {
-  padding: 20px;
 }
 
 .search{

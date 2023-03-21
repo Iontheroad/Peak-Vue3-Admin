@@ -36,9 +36,6 @@ function handleSetLanguage(lang: string) {
 <style scoped lang="scss">
 .language {
   margin-right: 20px;
-  display: flex;
-  align-items: center;
-
   .icon {
     font-size: 26px;
     cursor: pointer;

@@ -4,6 +4,14 @@ export default {
     dashboard: "首页",
     document: "项目文档",
   },
+  tabs: {
+    more: "更多",
+    refresh: "刷新",
+    maximize: "最大化",
+    closeCurrent: "关闭当前",
+    closeOther: "关闭其它",
+    closeAll: "关闭所有",
+  },
   // 登录页面国际化
   login: {
     title: "vue3-element-admin",

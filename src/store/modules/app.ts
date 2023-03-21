@@ -13,17 +13,6 @@ import { defineStore } from "pinia";
 import { computed, reactive, ref } from "vue";
 import { useStorage } from "@vueuse/core";
 
-export enum DeviceType {
-  mobile,
-  desktop,
-}
-
-export enum SizeType {
-  default,
-  large,
-  small,
-}
-
 // setup
 export const useAppStore = defineStore("app", () => {
   // state
@@ -38,7 +27,6 @@ export const useAppStore = defineStore("app", () => {
   const size = ref(getSize() || "default"); // 布局大小
 
   // actions
-
   /**
    * 菜单展开收起
    * @param withoutAnimation

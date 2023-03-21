@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb class="app-breadcrumb" separator="/">
+  <el-breadcrumb class="breadcrumb_container" separator="/">
     <transition-group name="breadcrumb">
       <!-- 遍历点击的路由信息添加面包屑 -->
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
@@ -16,11 +16,11 @@
           class="no-redirect"
         >
           <SvgIcon :icon-name="item.meta.icon as string" />
-          {{ generateTitle(item.meta.title) }}
+          {{ generateTitle("route." + item.meta.title) }}
         </span>
         <a v-else @click.prevent="handleLink(item)">
           <SvgIcon :icon-name="item.meta.icon as string" />
-          {{ generateTitle(item.meta.title) }}
+          {{ generateTitle("route." + item.meta.title) }}
         </a>
       </el-breadcrumb-item>
     </transition-group>
@@ -30,7 +30,7 @@
 <script lang="ts" setup name="Breadcrumb">
 import SvgIcon from "@/components/SvgIcon/index.vue";
 import * as pathToRegexp from "path-to-regexp";
-import { generateTitle } from "@/utils/i18n";
+import { generateTitle } from "@/lang/index";
 import { useRoute, useRouter, RouteLocationMatched } from "vue-router";
 import { watch, onBeforeMount, Ref, ref } from "vue";
 const route = useRoute();
@@ -60,13 +60,13 @@ function getBreadcrumb() {
   );
   const first = matched[0]; // 拿到第一个跟路由信息
 
-  // 判断第一个路由是不是首页路由进入
+  // 判断第一个路由是不是首页路由
   if (!isDashboard(first)) {
     //不是 就创建个新数组把首页路由添加到数组的第一位
     matched = [
       {
         path: "/dashboard",
-        meta: { title: "dashboard", icon: "dashboard" },
+        meta: { title: "dashboard", icon: "menu-home" },
       } as any,
     ].concat(matched);
   }
@@ -103,8 +103,7 @@ function isDashboard(route: RouteLocationMatched) {
  * @param path
  */
 function pathCompile(path: string) {
-  // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
-  const { params } = route; // 当前路由信息(未跳转的)
+  const { params } = route;
   /*  // pathToRegexp.compile()方法的介绍
       var url = "/user/:id/:name"; // /user/10001/bob
       var url2 = "/user/role"; // /user/role
@@ -131,7 +130,7 @@ function handleLink(item: any) {
 </script>
 
 <style lang="scss" scoped>
-.app-breadcrumb.el-breadcrumb {
+.breadcrumb_container.el-breadcrumb {
   display: inline-block;
   font-size: 14px;
   line-height: 50px;

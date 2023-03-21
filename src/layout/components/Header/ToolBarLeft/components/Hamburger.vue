@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 0 15px" @click="toggleClick">
+  <div class="hamburger_container" @click="toggleClick">
     <!-- 展开收起的按钮图标 -->
     <!-- <svg-icon
       :class-name="'hamburger ' + (isActive ? 'is-active' : '')"
@@ -8,7 +8,7 @@
 
     <svg
       :class="{ 'is-active': isActive }"
-      class="hamburger"
+      class="hamburger_icon"
       viewBox="0 0 1024 1024"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Hamburger">
 defineProps<{
   isActive: boolean; // 展开或收起时的图标状态
 }>();
@@ -34,15 +34,26 @@ function toggleClick() {
 }
 </script>
 
-<style scoped>
-.hamburger {
-  display: inline-block;
-  vertical-align: middle;
-  width: 20px;
-  height: 20px;
-}
-
-.hamburger.is-active {
-  transform: rotate(180deg);
+<style scoped lang="scss">
+.hamburger_container {
+  width: 50px;
+  line-height: 50px;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s; // 动画
+  -webkit-tap-highlight-color: transparent;
+  &:hover {
+    background: rgba(0, 0, 0, 0.025);
+  }
+  .hamburger_icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+  }
+  .hamburger_icon.is-active {
+    transform: rotate(180deg);
+  }
 }
 </style>

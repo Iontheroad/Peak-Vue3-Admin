@@ -3,20 +3,36 @@
  */
 
 import { createPinia, defineStore } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import useUserStore from "./modules/user";
 import { getLanguage } from "@/lang/index";
 import { setLanguage } from "@/utils/localStorage";
 
+interface GlobalType {
+  elementSize: "default" | "large" | "small";
+  language: string;
+  themeConfig: {
+    layout: "vertical" | "classic" | "transverse" | "columns";
+    isShowLogo: boolean;
+    isFixedHeader: boolean;
+    isShowTabsView: boolean;
+    isShowTabsIcon: boolean;
+  };
+}
+
 // 全局状态
 const useGlobalStore = defineStore("globalStore", {
-  state: () => ({
-    elementSize: "default" as "default" | "large" | "small",
+  state: (): GlobalType => ({
+    elementSize: "default",
     language: getLanguage(), // 获取语言
     /* 主体配置 */
     themeConfig: {
+      // 布局切换 ==>  纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns
+      layout: "vertical",
       isShowLogo: true, // 是否显示Logo
       isFixedHeader: true, // 是否固定表头
-      isShowTagsView: true, // 是否显示标签视图
+      isShowTabsView: true, // 是否显示标签视图
+      isShowTabsIcon: true, // 是否显示标签icon
     },
   }),
 
@@ -33,7 +49,7 @@ const useGlobalStore = defineStore("globalStore", {
 });
 
 const pinia = createPinia();
-
+pinia.use(piniaPluginPersistedstate);
 //
 export { useGlobalStore, useUserStore };
 export default pinia;

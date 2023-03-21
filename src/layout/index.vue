@@ -1,133 +1,19 @@
 <template>
-  <div class="layout" :class="classObj">
-    <!-- 移动端点击展开导航会有遮罩层 -->
-    <MobileMask />
-    <!-- 菜单栏 -->
-    <Menu />
-    <div :class="{ haTagsView: isShowTagsView }" class="main-container">
-      <!-- 头部 -->
-      <Header :class="{ 'fixed-header': isFixedHeader }" />
-      <!-- 主体视图 -->
-      <Main />
-    </div>
-  </div>
+  <component :is="isLayout[themeConfig.layout]"></component>
 </template>
 
-<script lang="ts" setup name="Layout">
-// api
-import { computed, watch, onBeforeMount, onBeforeUnmount } from "vue";
-import { useRoute } from "vue-router";
-// 组件
-import Header from "./components/Header/index.vue";
-import Menu from "./components/Menu/index.vue";
-import Main from "./components/Main/index.vue";
-import MobileMask from "./components/MobileMask.vue";
-// store
-import { useGlobalStore } from "@/store/index";
-import { useAppStore } from "@/store/modules/app";
+<script setup lang="ts" name="Layout">
+import { useGlobalStore } from "@/store";
+import { computed, defineAsyncComponent, reactive, type Component } from "vue";
 
-const route = useRoute();
 const globalStore = useGlobalStore();
-const appStore = useAppStore();
+const themeConfig = computed(() => globalStore.themeConfig);
 
-const sidebar = computed(() => appStore.sidebar);
-// pc：desktop    移动：mobile 窗口宽度小于992
-const device = computed(() => appStore.device);
-const isFixedHeader = computed(() => globalStore.themeConfig.isFixedHeader); // 是否固定表头
-const isShowTagsView = computed(() => globalStore.themeConfig.isShowTagsView); // 是否显示标签视图
-
-/**
- * 根据菜单栏的展开/半收起/隐藏状态 动态控制样式
- */
-const classObj = computed(() => {
-  return {
-    // 收起侧边栏
-    hideSidebar: !sidebar.value.opened,
-    // 打开侧边栏
-    openSidebar: sidebar.value.opened,
-    // 动画
-    withoutAnimation: sidebar.value.withoutAnimation,
-    // 移动端
-    mobile: device.value === "mobile", // 移动端
-  };
-});
-
-/* 在mobile情况下,路由跳转后关闭菜单栏 */
-watch(route, () => {
-  if (device.value == "mobile" && sidebar.value.opened) {
-    appStore.closeSideBar(false);
-  }
-});
-
-/* 监听窗口大小，在不同情况下，调整菜单栏状态 */
-onBeforeMount(() => {
-  window.addEventListener("resize", resizeSidebar);
-});
-onBeforeUnmount(() => {
-  window.removeEventListener("resize", resizeSidebar);
-});
-function resizeSidebar() {
-  // 我们需要在特定的时候判断页面的显示状态，例如：当视频加载到可播放状态时，根据用户是否停留在当前页面来决定是否开始自动播放。页面的展示的状态的判断就需要用到;
-  // bool型，表示页面是否处于隐藏状态。页面隐藏包括页面在后台标签页或者浏览器最小化。
-  // 确保页面状态
-  if (!document.hidden) {
-    const isMobile = document.body.getBoundingClientRect().width;
-    if (isMobile < 992) {
-      // 小于992调成移动设备
-      appStore.toggleDevice("mobile");
-      // 关闭菜单
-      appStore.closeSideBar(false);
-    } else {
-      // pc端
-      appStore.toggleDevice("desktop");
-      if (isMobile >= 1200) {
-        //大于1200，展开
-        appStore.openSideBar(false);
-      } else {
-        // 收起
-        appStore.closeSideBar(false);
-      }
-    }
-  }
-}
+const isLayout: { [key: string]: Component } = {
+  vertical: defineAsyncComponent(
+    () => import("@/layout/LayoutVertical/index.vue")
+  ),
+};
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/mixin.scss";
-@import "@/styles/variables.module.scss";
-
-.layout {
-  @include clearfix;
-  position: relative;
-  height: 100%;
-  width: 100%;
-
-  /* 展开状态下  固定表头(header导航栏) */
-  .fixed-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 9;
-    width: calc(100% - #{$sideBarWidth});
-    transition: width 0.28s;
-  }
-
-  /* 半收起侧边栏，header导航栏宽度 */
-  &.hideSidebar .fixed-header {
-    width: calc(100% - 54px);
-  }
-
-  /* 移动端下, header导航栏宽度 */
-  &.mobile {
-    // 移动端打开侧边栏
-    // &.openSidebar {
-    //   position: fixed;
-    //   top: 0;
-    // }
-    //  移动端，导航栏百分百宽
-    .fixed-header {
-      width: 100%;
-    }
-  }
-}
-</style>
+<style scoped></style>

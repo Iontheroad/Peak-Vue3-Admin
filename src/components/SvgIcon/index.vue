@@ -17,7 +17,6 @@ interface SvgProps {
   prefix?: string;
   iconName: string;
 }
-
 // const props = defineProps<SvgProps>();
 const props = defineProps({
   // 图标的前缀 ==> 非必填（默认为 “icon”）

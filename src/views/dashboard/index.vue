@@ -1,14 +1,7 @@
 <template>
-  <div>
-    首页
-    <!-- <div>
-      <BarChart />
-    </div> -->
-  </div>
+  <div>首页</div>
 </template>
 
-<script setup lang="ts" name="Dashboard">
-// import BarChart from "./components/Chart/BarChart.vue";
-</script>
+<script setup lang="ts" name="Dashboard"></script>
 
 <style scoped></style>

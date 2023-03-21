@@ -1,13 +1,4 @@
-import {
-  onBeforeUnmount,
-  onActivated,
-  onDeactivated,
-  nextTick,
-  watchEffect,
-  watch,
-  ref,
-  computed,
-} from "vue";
+import { onBeforeUnmount, onActivated, onDeactivated } from "vue";
 import { useDebounceFn } from "@vueuse/core";
 import * as echarts from "echarts";
 
@@ -24,47 +15,33 @@ export const useEcharts = (
   if (options && typeof options === "object") {
     myChart.setOption(options);
   }
-  const echartsResize = useDebounceFn(() => {
+  const echartsResize = useDebounceFn((event) => {
+    // console.log(event);
+
     myChart && myChart.resize();
   }, 100);
 
+  // 监听浏览器窗口大小
   window.addEventListener("resize", echartsResize);
 
-  // 监听sidebar栏 动画
-  const transitionendFun = (event: TransitionEvent) => {
-    // 传递 触发的事件对象，用于对比出菜单栏
-    sidebarTransition(event, echartsResize);
-  };
-  window.addEventListener("transitionend", transitionendFun);
+  // 监听菜单栏 动画
+  let layout_menu = document.getElementsByClassName(
+    "layout_menu"
+  )[0] as HTMLElement;
+  layout_menu.addEventListener("transitionend", echartsResize);
 
   onBeforeUnmount(() => {
     window.removeEventListener("resize", echartsResize);
-    window.removeEventListener("transitionend", transitionendFun);
+    layout_menu.removeEventListener("transitionend", echartsResize);
   });
 
   onActivated(() => {
     window.addEventListener("resize", echartsResize);
-    window.addEventListener("transitionend", transitionendFun);
+    layout_menu.addEventListener("transitionend", echartsResize);
   });
 
   onDeactivated(() => {
     window.removeEventListener("resize", echartsResize);
-    window.removeEventListener("transitionend", transitionendFun);
+    layout_menu.removeEventListener("transitionend", echartsResize);
   });
-
-  // return function removeFun() {
-  //   window.removeEventListener("resize", echartsResize);
-  // };
 };
-
-/**
- * 菜单栏监听
- * @param event
- * @param callback  //  echarts的 resize函数
- */
-function sidebarTransition(event: TransitionEvent, callback: () => void) {
-  let sidebar = document.querySelector(".sidebar-container")!;
-  if (sidebar == event.target && event.propertyName == "width") {
-    callback && callback();
-  }
-}
