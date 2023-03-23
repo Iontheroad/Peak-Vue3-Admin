@@ -63,11 +63,9 @@ function resizeSidebar() {
 .main {
   position: relative;
   box-sizing: border-box;
-  /*50 = navbar  */
   width: 100%;
-  overflow: hidden;
-  padding: 10px 12px;
-  overflow-x: hidden;
+  padding: 10px 12px 40px 12px;
+  overflow: visible;
   background-color: #eef0f3;
 }
 </style>

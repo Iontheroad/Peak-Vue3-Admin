@@ -49,6 +49,7 @@
       </el-header>
       <!-- 视图区域 -->
       <Main />
+      <el-footer class="layout_footer"><Footer /></el-footer>
     </el-container>
   </el-container>
 </template>
@@ -65,6 +66,7 @@ import ToolBarLeft from "@/layout/components/Header/ToolBarLeft/index.vue";
 import ToolBarRight from "@/layout/components/Header/ToolBarRight/index.vue";
 import Tabs from "@/layout/components/Header/Tabs/index.vue";
 import Main from "@/layout/components/Main/index.vue";
+import Footer from "@/layout/components/Footer/index.vue";
 // store
 import { useAppStore } from "@/store/modules/app";
 import { usePermissionStore } from "@/store/modules/permission";
@@ -124,7 +126,7 @@ const classObj = computed(() => {
   // 主体
   .layout_main {
     position: relative;
-    min-height: 100%;
+    height: 100%;
     // 右侧的外边距的大小就是菜单栏的宽度
     margin-left: $sideBarWidth;
     // 菜单栏收起添加一个左外边距的过度
@@ -156,6 +158,7 @@ const classObj = computed(() => {
         & + .main {
           // 原有的10 + 头部高度50
           padding-top: 60px;
+          overflow: auto;
         }
       }
 
@@ -169,6 +172,17 @@ const classObj = computed(() => {
           padding-top: 100px;
         }
       }
+    }
+
+    /* 尾部 */
+    .layout_footer {
+      position: fixed;
+      bottom: 0px;
+      right: 0px;
+      width: calc(100% - $sideBarWidth);
+      height: auto;
+      padding: 0px;
+      transition: width 0.28s;
     }
   }
 }

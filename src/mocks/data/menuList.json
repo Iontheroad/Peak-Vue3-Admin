@@ -85,11 +85,22 @@
     },
     "children": [
       {
-        "path": "tableVerify",
-        "name": "TableVerify",
-        "component": "superTable/tableVerify/index",
+        "path": "tableCheck",
+        "name": "TableCheck",
+        "component": "superTable/tableCheck/index",
         "meta": {
-          "title": "普通表格",
+          "title": "表格单行校验",
+          "icon": "menu-table",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      },
+      {
+        "path": "tableAllCheck",
+        "name": "TableAllCheck",
+        "component": "superTable/tableAllCheck/index",
+        "meta": {
+          "title": "表格统一校验",
           "icon": "menu-table",
           "roles": ["ADMIN"],
           "isKeepAlive": true

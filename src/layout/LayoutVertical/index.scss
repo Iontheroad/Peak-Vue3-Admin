@@ -90,8 +90,10 @@
     // 收起菜单，右侧视图区域的left值
     .layout_main {
       margin-left: 65px;
-      // 半收起侧边栏，header导航栏宽度
-      .header_container.fixed-header {
+      // 半收起侧边栏，header导航栏宽度, 以及尾部
+      .header_container.fixed-header,
+      .layout_footer {
+        transition: width 0.28s;
         width: calc(100% - 65px);
       }
     }
@@ -116,8 +118,10 @@
     // 移动端情况下，右侧视图区域外边距为0，占据全屏
     .layout_main {
       margin-left: 0px;
-      //  移动端，导航栏百分百宽
-      .header_container.fixed-header {
+      //  移动端，导航栏百分百宽 以及 尾部
+      .header_container.fixed-header,
+      .layout_footer {
+        transition: width 0.28s;
         width: 100%;
       }
     }
