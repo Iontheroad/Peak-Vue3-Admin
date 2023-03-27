@@ -117,7 +117,7 @@ export const usePermissionStore = defineStore({
 });
 
 /**
- * 扁平化路由
+ * 扁平化路由 tabs
  * @param menuList
  * @returns
  */

@@ -1,7 +1,12 @@
 <script setup lang="ts" name="Role"></script>
 
 <template>
-  <div></div>
+  <el-card header="角色管理待完善" class="role_box"></el-card>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.role_box {
+  width: 100%;
+  height: 100%;
+}
+</style>

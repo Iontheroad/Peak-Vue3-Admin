@@ -1,31 +1,34 @@
 <template>
-  <el-card shadow="hover" header="vuedraggable 可以拖拽组件">
-    <draggable
-      class="card grid-container"
-      v-model="gridList"
-      item-key="id"
-      animation="300"
-      chosenClass="chosen"
-      forceFallback="true"
-    >
-      <template #item="{ element }">
-        <div class="item" :style="element.bg">
-          {{ element.num }}
-        </div>
+  <el-card
+    class="card_box"
+    :body-style="{ height: '100%' }"
+    shadow="hover"
+    header="vuedraggable 可以拖拽组件"
+  >
+    <MyDraggable :gridList="gridList" v-on:changeGridList="changeGridList">
+      <template v-slot="{ element }">
+        <div>{{ element.id }}</div>
       </template>
-    </draggable>
+    </MyDraggable>
   </el-card>
 </template>
 
 <script setup lang="ts" name="Draggable">
 import { ref } from "vue";
-import draggable from "vuedraggable/src/vuedraggable";
+import MyDraggable, { type GridItem } from "@/components/MyDraggable/index.vue";
+// 默认公共样式
+let commonStyle = {
+  backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
+    Math.random() * 255
+  )}, ${Math.ceil(Math.random() * 255)})`,
+};
 
-let gridList = ref([
+// 数据
+let gridList = ref<GridItem[]>([
   {
     id: 1,
-    num: 1,
-    bg: {
+    myStyle: {
+      ...commonStyle,
       backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
         Math.random() * 255
       )}, ${Math.ceil(Math.random() * 255)})`,
@@ -33,8 +36,8 @@ let gridList = ref([
   },
   {
     id: 2,
-    num: 2,
-    bg: {
+    myStyle: {
+      ...commonStyle,
       backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
         Math.random() * 255
       )}, ${Math.ceil(Math.random() * 255)})`,
@@ -42,8 +45,8 @@ let gridList = ref([
   },
   {
     id: 3,
-    num: 3,
-    bg: {
+    myStyle: {
+      ...commonStyle,
       backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
         Math.random() * 255
       )}, ${Math.ceil(Math.random() * 255)})`,
@@ -51,8 +54,8 @@ let gridList = ref([
   },
   {
     id: 4,
-    num: 4,
-    bg: {
+    myStyle: {
+      ...commonStyle,
       backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
         Math.random() * 255
       )}, ${Math.ceil(Math.random() * 255)})`,
@@ -60,8 +63,8 @@ let gridList = ref([
   },
   {
     id: 5,
-    num: 5,
-    bg: {
+    myStyle: {
+      ...commonStyle,
       backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
         Math.random() * 255
       )}, ${Math.ceil(Math.random() * 255)})`,
@@ -69,63 +72,28 @@ let gridList = ref([
   },
   {
     id: 6,
-    num: 6,
-    bg: {
-      backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
-        Math.random() * 255
-      )}, ${Math.ceil(Math.random() * 255)})`,
-    },
-  },
-  {
-    id: 7,
-    num: 7,
-    bg: {
-      backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
-        Math.random() * 255
-      )}, ${Math.ceil(Math.random() * 255)})`,
-    },
-  },
-  {
-    id: 8,
-    num: 8,
-    bg: {
-      backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
-        Math.random() * 255
-      )}, ${Math.ceil(Math.random() * 255)})`,
-    },
-  },
-  {
-    id: 9,
-    num: 9,
-    bg: {
+    myStyle: {
+      ...commonStyle,
       backgroundColor: `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
         Math.random() * 255
       )}, ${Math.ceil(Math.random() * 255)})`,
     },
   },
 ]);
+
+/**
+ * 回调修改 gridList
+ * @param newList
+ */
+const changeGridList = (newList: GridItem[]) => {
+  gridList.value = newList;
+};
 </script>
 
 <style scoped lang="scss">
-// @import "./index.scss";
-.grid-container {
-  height: 100%;
-  display: grid;
-  grid-template-rows: 33.3% 33.3% 33.3%;
-  grid-template-columns: 33.3% 33.3% 33.3%;
-  .item {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 25px;
-    color: #ffffff;
-    cursor: move;
-    border: 1px solid #e5e4e9;
-  }
-}
-// 拖动的元素的样式
-.chosen {
-  border: 2px solid rgb(100, 82, 82) !important;
+.card_box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 </style>

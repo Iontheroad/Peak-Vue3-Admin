@@ -89,18 +89,7 @@
         "name": "TableCheck",
         "component": "superTable/tableCheck/index",
         "meta": {
-          "title": "表格单行校验",
-          "icon": "menu-table",
-          "roles": ["ADMIN"],
-          "isKeepAlive": true
-        }
-      },
-      {
-        "path": "tableAllCheck",
-        "name": "TableAllCheck",
-        "component": "superTable/tableAllCheck/index",
-        "meta": {
-          "title": "表格统一校验",
+          "title": "表格校验",
           "icon": "menu-table",
           "roles": ["ADMIN"],
           "isKeepAlive": true

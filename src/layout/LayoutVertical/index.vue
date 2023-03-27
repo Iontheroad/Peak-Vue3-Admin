@@ -119,7 +119,6 @@ const classObj = computed(() => {
 @import "./index.scss";
 .layout_container {
   @include clearfix;
-  display: flex;
   position: relative;
   height: 100%;
   width: 100%;
@@ -131,12 +130,12 @@ const classObj = computed(() => {
     margin-left: $sideBarWidth;
     // 菜单栏收起添加一个左外边距的过度
     transition: margin-left 0.28s;
+    overflow: visible;
 
     /* 头部 */
     .header_container {
       position: relative;
       height: 50px; // 导航栏高度
-      // overflow: hidden;
       padding: 0px;
       background-color: #fff;
       // 头部工具
@@ -158,16 +157,13 @@ const classObj = computed(() => {
         & + .main {
           // 原有的10 + 头部高度50
           padding-top: 60px;
-          overflow: auto;
+          overflow: auto; // 头部固定时, 滚动条仅展示在main区域
         }
       }
 
       // 标签视图显示时： 视图区域的高度，以及固定时的上外边距
       &.isShowTabsView {
         height: 90px; // 头部高度为90
-        // .main {
-        //   min-height: calc(100vh - 84px);
-        // }
         &.fixed-header + .main {
           padding-top: 100px;
         }

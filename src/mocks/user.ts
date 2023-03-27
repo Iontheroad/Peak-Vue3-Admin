@@ -74,7 +74,7 @@ export default [
         code: "00000",
         data: {
           userId: 2,
-          nickname: "系统管理员",
+          nickname: "Peak",
           avatar:
             "https://img0.baidu.com/it/u=4100351681,3622422042&fm=253&fmt=auto&app=138&f=JPEG?w=300&h=300",
           roles: ["ADMIN"],

@@ -65,7 +65,9 @@ function resizeSidebar() {
   box-sizing: border-box;
   width: 100%;
   padding: 10px 12px 40px 12px;
-  overflow: visible;
   background-color: #eef0f3;
+  overflow: visible; // 默认滚动条在整个 .layout_main
+  display: flex;
+  flex-direction: column;
 }
 </style>

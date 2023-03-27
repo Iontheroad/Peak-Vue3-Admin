@@ -1,5 +1,5 @@
 <template>
-  <div class="tableAllCheck_box">
+  <div class="tableMultiRowCheck_box">
     <!-- 搜索 -->
     <div class="box_search"></div>
     <!-- 主体 -->
@@ -78,7 +78,7 @@
                   confirm-button-text="确定"
                   cancel-button-text="取消"
                   :icon="InfoFilled"
-                  icon-color="#626AEF"
+                  icon-color="#f62226"
                   title="是否确定删除该条数据?"
                   @confirm="confirmEvent(row)"
                   @cancel="cancelEvent"
@@ -125,7 +125,7 @@ interface TableDataItem {
 }
 
 export default {
-  name: "TableAllCheck",
+  name: "TableMultiRowCheck",
   // components: { CirclePlus, Delete },
   setup() {
     const formRef = ref();
@@ -134,9 +134,9 @@ export default {
         tableData: [
           {
             id: "1",
-            name: "",
-            idCard: "",
-            mobile: "",
+            name: "小明",
+            idCard: "320602198507252976",
+            mobile: "16666666666",
           },
           {
             id: "2",
@@ -175,7 +175,7 @@ export default {
           },
           {
             pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
-            message: "请输入正确的手机号码",
+            message: "请输入13~19开头的号码的11位数号码!",
             trigger: ["blur", "change"],
           },
         ],
@@ -212,7 +212,12 @@ export default {
             showClose: true,
           });
         } else {
-          console.log("未通过", invalidFields);
+          ElMessage.warning({
+            message: "校验未通过,请按规范输入！",
+            showClose: true,
+          });
+          // console.log("未通过", invalidFields);
+          return;
         }
       });
     };
@@ -241,7 +246,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.tableAllCheck_box {
+.tableMultiRowCheck_box {
   .box_main {
     .main_action {
       .action_left {

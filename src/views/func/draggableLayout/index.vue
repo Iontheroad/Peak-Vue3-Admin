@@ -1,11 +1,11 @@
 <template>
   <div class="grid-layout-container">
-    <el-card shadow="hover" header="vue-grid-layout 可以拖拽布局组件">
+    <el-card class="card_box" body-style="{height:'100%'}" shadow="hover">
+      <template v-slot:header> vue-grid-layout 可以拖拽布局组件</template>
       <el-alert
         title="`vue-grid-layout`，项目地址：https://github.com/jbaysolutions/vue-grid-layout"
         type="success"
         :closable="false"
-        class="mb15"
       ></el-alert>
       <grid-layout
         v-model:layout="state.layouts"
@@ -143,15 +143,20 @@ const state = reactive({
     },
   ],
 });
-console.log(state.layouts);
 </script>
 
 <style scoped lang="scss">
 .grid-layout-container {
+  flex: 1;
+  .card_box {
+    height: 100%;
+  }
+
   :deep(.vue-grid-item) {
     background-color: var(--el-color-primary);
     color: var(--el-color-white);
     &.vue-grid-placeholder {
+      // 拖动元素的原位置的阴影样式
       background: var(--el-color-primary);
       // opacity: 0.2;
       // transition-duration: 100ms;
