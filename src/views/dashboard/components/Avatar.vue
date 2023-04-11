@@ -2,7 +2,8 @@
   <div class="avatar">
     <el-avatar :size="size" :src="avatar" />
     <div class="avatar_text">
-      <div>早安, {{ userStore.userInfo.nickname }}, 又是元气满满的一天!</div>
+      <!-- <div>早安, {{ userStore.userInfo.nickname }}, 又是元气满满的一天!</div> -->
+      <div>{{ greeting }}</div>
       <div>{{ time }}</div>
     </div>
     <!-- <div class="tip">
@@ -14,9 +15,10 @@
 
 <script setup lang="ts" name="Avatar">
 import avatar from "@/assets/images/avatar.jpg";
+import { getGreeting } from "./avatar";
 // import dayjs from "dayjs";
 // import { dayjs } from "element-plus";
-import { ref, toRefs } from "vue";
+import { computed, ref, toRefs } from "vue";
 import { useUserStore } from "@/store/modules/user";
 const userStore = useUserStore();
 const props = withDefaults(defineProps<{ size: number }>(), {
@@ -24,7 +26,11 @@ const props = withDefaults(defineProps<{ size: number }>(), {
 });
 let { size } = toRefs(props);
 
-let time = ref("");
+// 根据当前时间段,显示不同招呼语
+let greeting = computed((): string => {
+  return getGreeting();
+});
+
 /**
  * 获取现在的时间
  */
@@ -50,6 +56,7 @@ const getTime = () => {
 /**
  * 初始化
  */
+let time = ref("");
 const initTime = () => {
   time.value = getTime();
   setInterval(() => {

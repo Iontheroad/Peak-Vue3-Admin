@@ -32,6 +32,7 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/js-cookie": "^3.0.3",
     "@types/mockjs": "^1.0.7",
     "@types/node": "^18.13.0",

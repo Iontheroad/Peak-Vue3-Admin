@@ -76,7 +76,7 @@ export default [
           userId: 2,
           nickname: "Peak",
           avatar:
-            "https://img0.baidu.com/it/u=4100351681,3622422042&fm=253&fmt=auto&app=138&f=JPEG?w=300&h=300",
+            "http://119.91.22.164:8085/images/11411538250643115avatar.jpg",
           roles: ["ADMIN"],
           perms: ["sys:user:edit", "sys:user:delete", "sys:user:add"],
           userInfo: {
