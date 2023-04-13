@@ -98,21 +98,18 @@ router.beforeEach(async (to, form, next) => {
   // const hasToken = getToken(); // 获取token
   // HACK: token过期后，点击的页面没有接口不回跳转到登录页
   const hasToken = userStore.token; // 获取token
-  //  判断是否登录
+  // 如果登录(是否存在Token)
   if (hasToken) {
+    // 登录后访问logo页，就还返回上一级
     if (to.path == "/login") {
-      // 登录后访问logo页，就还是返回上一级
-      next({ path: form.fullPath });
-      NProgress.done(); // 关闭进度条
+      next({ path: form.fullPath }); // 返回上一级
     } else {
       // 登录后访问login以外的页面
-      const hasGetUserInfo = userStore.userInfo.roles.length > 0;
-      // 判断是否拿到用户角色信息
-      if (hasGetUserInfo) {
-        // 拿到就直接通过
+      // 如果已经获取到用户信息，则直接进入该页面
+      if (userStore.userInfo.roles.length > 0) {
         next();
       } else {
-        // 没有拿到用户信息，就重新获取一下用户信息
+        // 没有拿到用户信息，就重新获取一下用户信息,并添加新的路由
         try {
           await userStore.getUserInfo_actions();
           const roles = userStore.userInfo.roles; // 当前用户的角色(身份)集合
@@ -123,18 +120,15 @@ router.beforeEach(async (to, form, next) => {
           userStore.resetUser();
           ElMessage.error((error as Error) || "Has Error");
           next(`/login?redirect=${to.path}`);
-          NProgress.done();
         }
       }
     }
   } else {
-    // 没有token
-    // 未登录可以访问的白名单页面(登录页面)
+    // 如果未登录,但访问的是白名单页面(例如:登录页面)
     if (whiteRouterList.includes(to.path)) {
-      next();
+      next(); // 直接通过
     } else {
       next(`/login?redirect=${to.path}`); // 重定向login
-      NProgress.done(); // 关闭进度条
     }
   }
 });
@@ -143,7 +137,7 @@ router.beforeEach(async (to, form, next) => {
  * 路由跳转结束
  */
 router.afterEach(() => {
-  NProgress.done();
+  NProgress.done(); // 关闭进度条
 });
 
 export default router;
@@ -159,3 +153,6 @@ export function resetRouter() {
     }
   });
 }
+
+// 写一个获取本地事件
+// Write a get local event
