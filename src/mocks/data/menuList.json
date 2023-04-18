@@ -131,6 +131,17 @@
           "roles": ["ADMIN"],
           "isKeepAlive": true
         }
+      },
+      {
+        "path": "imageUpload",
+        "name": "ImageUpload",
+        "component": "func/imageUpload/index",
+        "meta": {
+          "title": "图片上传",
+          "icon": "menu-function-move",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
       }
     ]
   },
