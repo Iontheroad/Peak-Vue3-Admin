@@ -7,17 +7,21 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import useUserStore from "./modules/user";
 import { getLanguage } from "@/lang/index";
 import { setLanguage } from "@/utils/localStorage";
+import { DEFAULT_PRIMARY } from "@/config/config";
 
 interface GlobalType {
   elementSize: "default" | "large" | "small";
   language: string;
-  themeConfig: {
-    layout: "vertical" | "classic" | "transverse" | "columns";
-    isShowLogo: boolean;
-    isFixedHeader: boolean;
-    isShowTabsView: boolean;
-    isShowTabsIcon: boolean;
-  };
+  themeConfig: ThemeConfigProps;
+}
+interface ThemeConfigProps {
+  layout: "vertical" | "classic" | "transverse" | "columns";
+  isShowLogo: boolean;
+  isFixedHeader: boolean;
+  isShowTabsView: boolean;
+  isShowTabsIcon: boolean;
+  primary: string;
+  isDark: Boolean;
 }
 
 // 全局状态
@@ -33,6 +37,8 @@ const useGlobalStore = defineStore("globalStore", {
       isFixedHeader: true, // 是否固定表头
       isShowTabsView: true, // 是否显示标签视图
       isShowTabsIcon: true, // 是否显示标签icon
+      primary: DEFAULT_PRIMARY, // 默认 primary 主题颜色
+      isDark: false,
     },
   }),
 
@@ -44,6 +50,14 @@ const useGlobalStore = defineStore("globalStore", {
     changeLanguage(language: string) {
       this.language = language;
       setLanguage(language); // 存储到本地
+    },
+
+    /**
+     * 设置主题
+     * @param themeConfig
+     */
+    setThemeConfig(themeConfig: ThemeConfigProps) {
+      this.themeConfig = themeConfig;
     },
   },
 });
