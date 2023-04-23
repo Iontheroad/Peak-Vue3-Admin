@@ -15,7 +15,7 @@ function handleSetLanguage(lang: string) {
 <template>
   <div class="language">
     <el-dropdown trigger="click" @command="handleSetLanguage">
-      <SvgIcon class="icon" icon-name="Header_language" />
+      <SvgIcon class="icon" icon-name="header-language" />
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item
@@ -35,12 +35,11 @@ function handleSetLanguage(lang: string) {
 
 <style scoped lang="scss">
 .language {
-  margin-right: 20px;
+  // margin-right: 20px;
   .icon {
     font-size: 26px;
     cursor: pointer;
     outline: none;
-    line-height: 50px;
   }
 }
 </style>

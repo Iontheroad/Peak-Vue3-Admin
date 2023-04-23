@@ -13,41 +13,47 @@
 <script setup lang="ts" name="SvgIcon">
 import { computed } from "vue";
 import { isExternal } from "@/utils/validate";
-interface SvgProps {
+export interface SvgProps {
   prefix?: string;
   iconName: string;
+  color?: string;
+  className?: string;
 }
-// const props = defineProps<SvgProps>();
-const props = defineProps({
-  // 图标的前缀 ==> 非必填（默认为 “icon”）
-  prefix: {
-    type: String,
-    default: "icon",
-  },
-
-  // 图标的名称 ==> 必传
-  iconName: {
-    type: String,
-    required: true,
-  },
-
-  /*
-  remove （默认值）
-    在动画的激活持续时间结束后，动画效果会移除（不再应用）。在动画的激活结束后，动画不再对目标元素有影响（除非动画重新开始）。
-  freeze
-    在动画激活持续时间结束后，文档持续时间的剩余时间里（或者直到动画重新开始）动画效果会“冻结”着。
-  */
-  color: {
-    type: String,
-    default: "",
-  },
-
-  // 传入的class样式
-  className: {
-    type: String,
-    default: "",
-  },
+const props = withDefaults(defineProps<SvgProps>(), {
+  prefix: "icon",
+  color: "",
+  className: "",
 });
+// const props = defineProps({
+//   // 图标的前缀 ==> 非必填（默认为 “icon”）
+//   prefix: {
+//     type: String,
+//     default: "icon",
+//   },
+
+//   // 图标的名称 ==> 必传
+//   iconName: {
+//     type: String,
+//     required: true,
+//   },
+
+//   /*
+//   remove （默认值）
+//     在动画的激活持续时间结束后，动画效果会移除（不再应用）。在动画的激活结束后，动画不再对目标元素有影响（除非动画重新开始）。
+//   freeze
+//     在动画激活持续时间结束后，文档持续时间的剩余时间里（或者直到动画重新开始）动画效果会“冻结”着。
+//   */
+//   color: {
+//     type: String,
+//     default: "",
+//   },
+
+//   // 传入的class样式
+//   className: {
+//     type: String,
+//     default: "",
+//   },
+// });
 
 // 拼接class类样式
 const className = computed(() => {

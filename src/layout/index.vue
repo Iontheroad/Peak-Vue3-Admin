@@ -1,8 +1,10 @@
 <template>
   <component :is="isLayout[themeConfig.layout]"></component>
+  <ThemeDrawer />
 </template>
 
 <script setup lang="ts" name="Layout">
+import ThemeDrawer from "./components/ThemeDrawer/index.vue";
 import { useGlobalStore } from "@/store";
 import { computed, defineAsyncComponent, reactive, type Component } from "vue";
 
