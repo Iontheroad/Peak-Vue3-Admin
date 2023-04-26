@@ -77,6 +77,7 @@ const themeConfig = computed(() => globalStore.themeConfig);
 
 // 打开主题设置
 const drawerVisible = ref(false);
+// 监听订阅点击 顶部栏主题设置
 mittBus.on("openThemeDrawer", () => (drawerVisible.value = true));
 </script>
 

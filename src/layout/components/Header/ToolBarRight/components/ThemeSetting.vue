@@ -1,18 +1,24 @@
 <template>
   <div class="theme-setting">
-    <el-icon
-      :class="'iconfont icon-zhuti'"
-      class="toolBar-icon"
-      @click="openDrawer"
-      ><Tools
-    /></el-icon>
+    <SvgIcon class="icon" icon-name="header-theme" @click="openDrawer" />
   </div>
 </template>
 
-<script setup lang="ts">
-import { Tools } from "@element-plus/icons-vue";
+<script setup lang="ts" name="ThemeSetting">
+// import { Tools } from "@element-plus/icons-vue";
+import SvgIcon from "@/components/SvgIcon/index.vue";
 import mittBus from "@/utils/mittBus";
 const openDrawer = () => {
   mittBus.emit("openThemeDrawer");
 };
 </script>
+<style scoped lang="scss">
+.theme-setting {
+  // margin-right: 20px;
+  .icon {
+    font-size: 36px;
+    cursor: pointer;
+    outline: none;
+  }
+}
+</style>

@@ -10,7 +10,7 @@ const globalStore = useGlobalStore();
 
 // 初始化主题配置
 const { initTheme } = useTheme();
-// initTheme();
+initTheme();
 
 // 获取语言包
 const locale = computed(() => {

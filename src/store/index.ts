@@ -4,6 +4,7 @@
 
 import { createPinia, defineStore } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import type { PersistedStateOptions } from "pinia-plugin-persistedstate";
 import useUserStore from "./modules/user";
 import { getLanguage } from "@/lang/index";
 import { setLanguage } from "@/utils/localStorage";
@@ -60,10 +61,21 @@ const useGlobalStore = defineStore("globalStore", {
       this.themeConfig = themeConfig;
     },
   },
+
+  persist: {
+    enabled: true, // 开启数据存储
+    strategies: [
+      {
+        key: "globalStore",
+        storage: localStorage,
+        paths: [],
+      },
+    ],
+  } as PersistedStateOptions,
 });
 
 const pinia = createPinia();
+// 数据持久化
 pinia.use(piniaPluginPersistedstate);
-//
 export { useGlobalStore, useUserStore };
 export default pinia;
