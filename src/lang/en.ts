@@ -14,7 +14,7 @@ export default {
   },
   // 登录页面国际化
   login: {
-    title: "vue3-element-admin",
+    title: "Peak Vue3 Admin",
     username: "Username",
     password: "Password",
     login: "Login",

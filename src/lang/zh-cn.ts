@@ -14,10 +14,10 @@ export default {
   },
   // 登录页面国际化
   login: {
-    title: "vue3-element-admin",
+    title: "Peak Vue3 Admin",
     username: "用户名",
     password: "密码",
-    login: "登 录",
+    login: "登录",
     code: "请输入验证码",
     copyright: "",
     icp: "",

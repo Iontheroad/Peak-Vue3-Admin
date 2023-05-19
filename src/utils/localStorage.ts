@@ -24,6 +24,7 @@ export const localStorage = {
 
 /**
  * 侧边栏状态(显示/隐藏)存储本地
+ * opened | closed(收起和半收起)
  */
 const SidebarStatusKey = "sidebarStatus";
 export function getSidebarStatus() {
