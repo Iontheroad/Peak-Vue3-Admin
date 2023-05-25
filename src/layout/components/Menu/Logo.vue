@@ -29,7 +29,9 @@ defineProps<{
 }>();
 
 let title = ref("Peak Vue3 Admin");
-const logo = ref<string>(new URL(`@/assets/logo.png`, import.meta.url).href);
+const logo = ref<string>(
+  new URL(`@/assets/peak_logo.png`, import.meta.url).href
+);
 </script>
 
 <style lang="scss" scoped>
