@@ -142,6 +142,17 @@
           "roles": ["ADMIN"],
           "isKeepAlive": true
         }
+      },
+      {
+        "path": "three",
+        "name": "Three",
+        "component": "func/Three/index",
+        "meta": {
+          "title": "3D",
+          "icon": "menu-function-move",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
       }
     ]
   },

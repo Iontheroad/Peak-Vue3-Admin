@@ -91,11 +91,8 @@
       </el-card>
     </el-col>
   </el-row>
-  <!-- <PageWrapLayout style="width: 100%">
-  </PageWrapLayout> -->
 </template>
 <script setup lang="ts">
-import PageWrapLayout from "@/components/PageWrapLayout/index.vue";
 import LineCharts from "./components/line.vue";
 import BarCharts from "./components/bar.vue";
 import PieCharts from "./components/pie.vue";
