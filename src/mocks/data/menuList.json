@@ -18,7 +18,7 @@
         "component": "system/user/index",
         "meta": {
           "title": "用户管理",
-          "icon": "menu-user",
+          "icon": "menu-system-user",
           "roles": ["ADMIN"],
           "isAlwaysShow": false
         }
@@ -29,7 +29,7 @@
         "component": "system/role/index",
         "meta": {
           "title": "角色管理",
-          "icon": "menu-role",
+          "icon": "menu-system-role",
           "roles": ["ADMIN"],
           "isAlwaysShow": false
         }
@@ -40,7 +40,7 @@
         "component": "system/menu/index",
         "meta": {
           "title": "菜单管理",
-          "icon": "menu-menu",
+          "icon": "menu-system-menu",
           "roles": ["ADMIN"],
           "isAlwaysShow": false,
           "isKeepAlive": true
@@ -52,7 +52,7 @@
         "component": "system/dept/index",
         "meta": {
           "title": "部门管理",
-          "icon": "menu-tree",
+          "icon": "menu-system-tree",
           "roles": ["ADMIN"],
           "isAlwaysShow": false,
           "isKeepAlive": true
@@ -64,7 +64,7 @@
         "component": "system/dict/index",
         "meta": {
           "title": "字典管理",
-          "icon": "menu-dict",
+          "icon": "menu-system-dict",
           "roles": ["ADMIN"],
           "isKeepAlive": true
         }
