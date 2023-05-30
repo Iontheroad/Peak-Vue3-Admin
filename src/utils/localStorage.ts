@@ -44,14 +44,3 @@ export function getSize() {
 export function setSize(size: string) {
   localStorage.set(SizeKey, size);
 }
-
-/**
- * 语言
- */
-const LanguageKey = "language";
-export function getLanguage_local() {
-  return localStorage.get(LanguageKey);
-}
-export function setLanguage(language: string) {
-  localStorage.set(LanguageKey, language);
-}

@@ -48,8 +48,10 @@
         <Tabs v-if="themeConfig.isShowTabsView" />
       </el-header>
       <!-- 视图区域 -->
-      <Main />
-      <el-footer class="layout_footer"><Footer /></el-footer>
+      <Main :class="{ isShowFooter: themeConfig.isShowFooter }" />
+      <el-footer v-if="themeConfig.isShowFooter" class="layout_footer">
+        <Footer />
+      </el-footer>
     </el-container>
   </el-container>
 </template>
@@ -138,6 +140,7 @@ const classObj = computed(() => {
       height: 50px; // 导航栏高度
       padding: 0px;
       background-color: #fff;
+
       // 头部工具
       .header-tools {
         display: flex;
@@ -146,6 +149,7 @@ const classObj = computed(() => {
         // box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
         border-bottom: 1px solid #f1f1f1;
       }
+
       // 固定表头(header导航栏)
       &.fixed-header {
         position: fixed;
@@ -153,6 +157,7 @@ const classObj = computed(() => {
         z-index: 9;
         transition: width 0.28s;
         width: calc(100% - $sideBarWidth);
+
         // Header固定时, 视图区域空出Header高度的上外边距
         & + .main {
           // 原有的10 + 头部高度50
@@ -168,6 +173,11 @@ const classObj = computed(() => {
           padding-top: 100px;
         }
       }
+    }
+
+    /* 显示页脚时 main的下内边距 */
+    .main.isShowFooter {
+      padding-bottom: 40px;
     }
 
     /* 尾部 */

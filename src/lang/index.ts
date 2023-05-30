@@ -23,7 +23,7 @@ const messages = {
  */
 export const getLanguage = () => {
   // 获取本地缓存的语言
-  let language = localStorage.get("language");
+  let language = localStorage.get("globalStore")?.language;
   if (language) {
     return language;
   }

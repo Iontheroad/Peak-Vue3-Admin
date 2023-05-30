@@ -16,44 +16,56 @@
     <br />
 
     <!-- 界面设置 -->
-    <!-- <el-divider class="divider" content-position="center">
+    <el-divider class="divider" content-position="center">
       <el-icon><Setting /></el-icon>
       界面设置
     </el-divider>
     <div class="theme-item">
-      <span>折叠菜单</span>
-      <el-switch v-model="themeConfig.isCollapse" />
+      <span>显示Logo</span>
+      <el-switch v-model="themeConfig.isShowLogo" />
     </div>
     <div class="theme-item">
-      <span>面包屑</span>
-      <el-switch v-model="themeConfig.breadcrumb" />
+      <span>固定Header</span>
+      <el-switch v-model="themeConfig.isFixedHeader" />
+    </div>
+    <div class="theme-item">
+      <span>
+        <el-tooltip
+          effect="dark"
+          content="移动端下不显示面包屑"
+          placement="right"
+        >
+          面包屑
+        </el-tooltip>
+      </span>
+      <el-switch v-model="themeConfig.isShowBreadcrumb" />
     </div>
     <div class="theme-item">
       <span>面包屑图标</span>
-      <el-switch v-model="themeConfig.breadcrumbIcon" />
+      <el-switch v-model="themeConfig.isShowBreadcrumbIcon" />
     </div>
     <div class="theme-item">
       <span>标签栏</span>
-      <el-switch v-model="themeConfig.tabs" />
+      <el-switch v-model="themeConfig.isShowTabsView" />
     </div>
     <div class="theme-item">
       <span>标签栏图标</span>
-      <el-switch v-model="themeConfig.tabsIcon" />
+      <el-switch v-model="themeConfig.isShowTabsIcon" />
     </div>
     <div class="theme-item">
       <span>页脚</span>
-      <el-switch v-model="themeConfig.footer" />
-    </div> -->
+      <el-switch v-model="themeConfig.isShowFooter" />
+    </div>
   </el-drawer>
 </template>
 
 <script setup lang="ts">
-import { ColdDrink } from "@element-plus/icons-vue";
+import { ColdDrink, Setting } from "@element-plus/icons-vue";
 import { ref, computed, watch } from "vue";
 import { useTheme } from "@/hooks/useTheme";
 import { useGlobalStore } from "@/store/index";
 import { DEFAULT_PRIMARY } from "@/config/config";
-import SwitchDark from "@/components/SwitchDark/index.vue";
+// import SwitchDark from "@/components/SwitchDark/index.vue";
 import mittBus from "@/utils/mittBus";
 
 const { changePrimary } = useTheme();
@@ -61,14 +73,14 @@ const { changePrimary } = useTheme();
 // 预定义主题颜色
 const colorList = [
   DEFAULT_PRIMARY,
+  "#27ae60",
+  "#409EFF",
+  "#ffc400",
   "#DAA96E",
   "#0C819F",
-  "#409EFF",
-  "#27ae60",
   "#ff5c93",
   "#e74c3c",
   "#fd726d",
-  "#f39c12",
   "#9b59b6",
 ];
 

@@ -15,12 +15,18 @@
           v-if="item.redirect == 'noRedirect' || index == levelList.length - 1"
           class="no-redirect"
         >
-          <SvgIcon :icon-name="item.meta.icon as string" />
-          {{ generateTitle("route." + item.meta.title) }}
+          <SvgIcon
+            v-show="themeConfig.isShowBreadcrumbIcon"
+            :icon-name="item.meta.icon as string"
+          />
+          {{ getTranslateLanguage("route." + item.meta.title) }}
         </span>
         <a v-else @click.prevent="handleLink(item)">
-          <SvgIcon :icon-name="item.meta.icon as string" />
-          {{ generateTitle("route." + item.meta.title) }}
+          <SvgIcon
+            v-show="themeConfig.isShowBreadcrumbIcon"
+            :icon-name="item.meta.icon as string"
+          />
+          {{ getTranslateLanguage("route." + item.meta.title) }}
         </a>
       </el-breadcrumb-item>
     </transition-group>
@@ -28,14 +34,19 @@
 </template>
 
 <script lang="ts" setup name="Breadcrumb">
-import SvgIcon from "@/components/SvgIcon/index.vue";
 import * as pathToRegexp from "path-to-regexp";
-import { generateTitle } from "@/lang/index";
 import { useRoute, useRouter, RouteLocationMatched } from "vue-router";
-import { watch, onBeforeMount, Ref, ref } from "vue";
+import { watch, onBeforeMount, Ref, ref, computed } from "vue";
+
+import SvgIcon from "@/components/SvgIcon/index.vue";
+
+import { getTranslateLanguage } from "@/lang/index";
+import { useGlobalStore } from "@/store";
+
 const route = useRoute();
 const router = useRouter();
-let levelList: Ref<RouteLocationMatched[]> = ref([]); // 存储点击的路由信息数据列表
+const globalStore = useGlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
 
 // 监听当前路由信息的数据变化
 watch(route, (newVal) => {
@@ -50,6 +61,7 @@ onBeforeMount(() => {
   getBreadcrumb();
 });
 
+let levelList: Ref<RouteLocationMatched[]> = ref([]); // 存储点击的路由信息数据列表
 /**
  * 得到面包屑数据
  */
@@ -61,7 +73,7 @@ function getBreadcrumb() {
   const first = matched[0]; // 拿到第一个跟路由信息
 
   // 判断第一个路由是不是首页路由
-  if (!isDashboard(first)) {
+  if (!isHomePage(first)) {
     //不是 就创建个新数组把首页路由添加到数组的第一位
     matched = [
       {
@@ -84,10 +96,10 @@ function getBreadcrumb() {
 }
 
 /**
- * 判断是不是 首页路由(Dashboard)
+ * 判断是不是 首页路由
  * @param route
  */
-function isDashboard(route: RouteLocationMatched) {
+function isHomePage(route: RouteLocationMatched) {
   let name = route?.name as string;
   if (!name) {
     // 传入的是空也返回false

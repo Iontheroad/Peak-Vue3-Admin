@@ -7,7 +7,6 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import type { PersistedStateOptions } from "pinia-plugin-persistedstate";
 import useUserStore from "./modules/user";
 import { getLanguage } from "@/lang/index";
-import { setLanguage } from "@/utils/localStorage";
 import { DEFAULT_PRIMARY } from "@/config/config";
 
 interface GlobalType {
@@ -19,8 +18,11 @@ interface ThemeConfigProps {
   layout: "vertical" | "classic" | "transverse" | "columns";
   isShowLogo: boolean;
   isFixedHeader: boolean;
+  isShowBreadcrumb: Boolean;
+  isShowBreadcrumbIcon: Boolean;
   isShowTabsView: boolean;
   isShowTabsIcon: boolean;
+  isShowFooter: boolean;
   primary: string;
   isDark: Boolean;
 }
@@ -36,8 +38,11 @@ const useGlobalStore = defineStore("globalStore", {
       layout: "vertical",
       isShowLogo: true, // 是否显示Logo
       isFixedHeader: true, // 是否固定表头
+      isShowBreadcrumb: true, // 面包屑导航
+      isShowBreadcrumbIcon: true, // 面包屑导航图标
       isShowTabsView: true, // 是否显示标签视图
       isShowTabsIcon: true, // 是否显示标签icon
+      isShowFooter: true, // 是否显示页脚
       primary: DEFAULT_PRIMARY, // 默认 primary 主题颜色
       isDark: false,
     },
@@ -50,7 +55,6 @@ const useGlobalStore = defineStore("globalStore", {
      */
     changeLanguage(language: string) {
       this.language = language;
-      setLanguage(language); // 存储到本地
     },
 
     /**
