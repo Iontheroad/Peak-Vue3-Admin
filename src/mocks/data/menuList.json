@@ -146,9 +146,20 @@
       {
         "path": "three",
         "name": "Three",
-        "component": "func/Three/index",
+        "component": "func/three/index",
         "meta": {
           "title": "3D",
+          "icon": "menu-function-move",
+          "roles": ["ADMIN"],
+          "isKeepAlive": true
+        }
+      },
+      {
+        "path": "/func/forum",
+        "name": "Forum",
+        "component": "func/forum/index",
+        "meta": {
+          "title": "讨论区",
           "icon": "menu-function-move",
           "roles": ["ADMIN"],
           "isKeepAlive": true
