@@ -1,6 +1,6 @@
 ## 简介
 
-Peak-Vue3-Admin 是一个基于 Vue-Element-Admin 升级的且借鉴了 Geeker-Admin 的 Vue3 免费模板，并对项目整体进行了大量逻辑、结构、样式的重构和梳理，具备了一定规范的模块化开发，项目使用了 Vite3、Vue3、TypeScript、Pinia、Element-Plus 等目前最新技术栈开发，基于 mock 实现本地数据模拟具备规范接口请求，本项目对代码进行了大量的代码注释，以及对样式的分析和注释，既可以学习又可以基于模板二次开发，大大降低了开发和学习的成本。
+Peak-Vue3-Admin 是一个以 vue-admin-template 为基础框架升级，整合了各种后台项目的优点对移动端有一定的适配，并对项目整体进行了大量逻辑、结构、样式的重构和梳理，具备了一定规范的模块化开发，项目使用了 Vite3、Vue3、TypeScript、Pinia、Element-Plus 等目前最新技术栈开发，基于 mock 实现本地数据模拟具备规范接口请求，本项目对代码进行了大量的代码说明以及对样式的分析和注释，大大降低了开发和学习的成本，既可以学习又可以基于模板功能二次开发。
 
 ## 功能
 
@@ -8,8 +8,11 @@ Peak-Vue3-Admin 是一个基于 Vue-Element-Admin 升级的且借鉴了 Geeker-A
 - 支持 i18n 国际化、页面结构主题配置等
 - 完备的登录流程以及用户的权限校验、动态路由权限拦截、页面按钮权限
 - 本地 mock 数据，高效规范开发
-- 拖动组件，ECharts 可视化图表
-- 功能不断迭代...
+- ThreeJS 加载 fbx 模型组件
+- 表格单行校验和统一校验,后续会增加结合表单等动态校验场景
+- 仿掘金评论区结构(模拟评论区所需数据结构)
+- 拖动组件，ECharts 可视化图表封装切换
+- 功能模块不断迭代增加...
 
 ## 代码仓库
 
@@ -18,7 +21,7 @@ Peak-Vue3-Admin 是一个基于 Vue-Element-Admin 升级的且借鉴了 Geeker-A
 
 ## 演示地址
 
-- https://iontheroad.gitee.io/peak-vue3-admin
+- http://iontheroad.gitee.io/peak-vue3-admin
 
 ## 安装
 
